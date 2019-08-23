@@ -1,0 +1,33 @@
+[user]
+	name = Jan-Gerke Salomon
+	email = jgs.salomon@gmail.com
+[alias]
+  aa = add -A
+  ap = add -p
+  bD = "!f() { git branch -D $(git branch | fzf); }; f"
+  c = commit
+  cm = commit -m
+  cl = clone
+  cld = "!f() { git clone https://github.com/dhis2/${1}; }; f"
+  co = checkout
+  cob = checkout -b
+  cof = "!f() { git checkout $(git branch | fzf); }; f"
+  d = diff
+  dc = diff --name-only --diff-filter=U
+  dn = diff --name-only
+  ds = diff --staged
+  dsn = diff --staged --name-only
+  fo = fetch origin
+  l1 = log -n 1
+  la = log --author="Gerke"
+  lan = la -n
+  mb = merge-base
+  poH = push origin HEAD
+  unc = reset HEAD~
+  rao = remote add origin
+  s = status
+[credential]
+	helper = store
+[core]
+	editor = nvim
+	excludesfile = ~/.dotfiles/git/.gitignore_global
