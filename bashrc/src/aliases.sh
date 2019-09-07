@@ -29,42 +29,53 @@ alias xduw="cd ~/development/dhis2/ui-widgets"
 alias xduf="cd ~/development/dhis2/ui-forms"
 alias xdoom="cd ~/development/dhis2/project-doom"
 
-BROWSER_NO=BROWER=NO
-
-function yarnfpn () {
-  PLAY_DEV_URL=REACT_APP_DHIS2_BASE_URL=https://functionalprogramming.ninja
-  CONFIG=DHIS2_HOME=$DHIS2_HOME
-  env "$BROWSER_NO" env "$CONFIG" env "$PLAY_DEV_URL" bash -c 'yarn start'
+function yarndev () {
+  env BROWER=$BROWSER_DEFAULT \
+    env DHIS2_HOME=$DHIS2_HOME_PLAY_DEV \
+    env REACT_APP_DHIS2_BASE_URL=$DHIS2_PLAY_BASE_URL/$PLAY_DEV_PATH \
+    bash -c 'yarn start'
 }
 
 function yarn33 () {
-  PLAY_DEV_URL=REACT_APP_DHIS2_BASE_URL=https://play.dhis2.org/dev
-  CONFIG=DHIS2_HOME=$DHIS2_HOME_PLAY_33
-  env "$BROWSER_NO" env "$CONFIG" env "$PLAY_DEV_URL" bash -c 'yarn start'
+  env BROWER=$BROWSER_DEFAULT \
+    env DHIS2_HOME=$DHIS2_HOME_PLAY_33 \
+    env REACT_APP_DHIS2_BASE_URL=$DHIS2_PLAY_BASE_URL/$PLAY_33_PATH \
+    bash -c 'yarn start'
 }
 
 function yarn32 () {
-  PLAY_DEV_URL=REACT_APP_DHIS2_BASE_URL=https://play.dhis2.org/2.32dev
-  CONFIG=DHIS2_HOME=$DHIS2_HOME_PLAY_32
-  env "$BROWSER_NO" env "$CONFIG" env "$PLAY_DEV_URL" bash -c 'yarn start'
+  env BROWER=$BROWSER_DEFAULT \
+    env DHIS2_HOME=$DHIS2_HOME_PLAY_32 \
+    env REACT_APP_DHIS2_BASE_URL=$DHIS2_PLAY_BASE_URL/$PLAY_32_PATH \
+    bash -c 'yarn start'
 }
 
 function yarn31 () {
-  PLAY_DEV_URL=REACT_APP_DHIS2_BASE_URL=https://play.dhis2.org/2.31dev
-  CONFIG=DHIS2_HOME=$DHIS2_HOME_PLAY_31
-  env "$BROWSER_NO" env "$CONFIG" env "$PLAY_DEV_URL" bash -c 'yarn start'
+  env BROWER=$BROWSER_DEFAULT \
+    env DHIS2_HOME=$DHIS2_HOME_PLAY_31 \
+    env REACT_APP_DHIS2_BASE_URL=$DHIS2_PLAY_BASE_URL/$PLAY_31_PATH \
+    bash -c 'yarn start'
 }
 
 function yarn30 () {
-  PLAY_DEV_URL=REACT_APP_DHIS2_BASE_URL=https://play.dhis2.org/2.30
-  CONFIG=DHIS2_HOME=$DHIS2_HOME_PLAY_30
-  env "$BROWSER_NO" env "$CONFIG" env "$PLAY_DEV_URL" bash -c 'yarn start'
+  env BROWER=$BROWSER_DEFAULT \
+    env DHIS2_HOME=$DHIS2_HOME_PLAY_30 \
+    env REACT_APP_DHIS2_BASE_URL=$DHIS2_PLAY_BASE_URL/$PLAY_30_PATH \
+    bash -c 'yarn start'
 }
 
 function yarn29 () {
-  PLAY_DEV_URL=REACT_APP_DHIS2_BASE_URL=https://play.dhis2.org/2.29
-  CONFIG=DHIS2_HOME=$DHIS2_HOME_PLAY_29
-  env "$BROWSER_NO" env "$CONFIG" env "$PLAY_DEV_URL" bash -c 'yarn start'
+  env BROWER=$BROWSER_DEFAULT \
+    env DHIS2_HOME=$DHIS2_HOME_PLAY_29 \
+    env REACT_APP_DHIS2_BASE_URL=$DHIS2_PLAY_BASE_URL/$PLAY_29_PATH \
+    bash -c 'yarn start'
+}
+
+function yarnfpn () {
+  env BROWER=$BROWSER_DEFAULT \
+    env DHIS2_HOME=$DHIS2_HOME_FPN \
+    env REACT_APP_DHIS2_BASE_URL=https://functionalprogramming.ninja/dhis \
+    bash -c 'yarn start'
 }
 
 # Dir info

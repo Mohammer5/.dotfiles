@@ -44,14 +44,21 @@
   augroup Foldmethod
     autocmd!
     autocmd Syntax vim setlocal foldmethod=marker
-    autocmd Syntax scss.css,javascript,javascript.jsx,typescript setlocal foldmethod=indent
+    autocmd Syntax scss.css setlocal foldmethod=indent
+    "autocmd Syntax scss.css,javascript,javascript.jsx,typescript setlocal foldmethod=indent
   augroup END
 
   augroup Foldbehavior
     autocmd!
-    autocmd Syntax scss.css,javascript,javascript.jsx,typescript setlocal nofoldenable " use `zi` to toggle
+    autocmd Syntax scss.css setlocal nofoldenable " use `zi` to toggle
+    "autocmd Syntax scss.css,javascript,javascript.jsx,typescript setlocal nofoldenable " use `zi` to toggle
   augroup END
 
+  augroup FoldJS
+    autocmd!
+    autocmd Syntax javascript,jsx,javascript.jsx,typescript setlocal foldmethod=syntax
+    autocmd Syntax javascript,jsx,javascript.jsx,typescript setlocal foldcolumn=1 "defines 1 col at window left, to indicate folding
+  augroup END
 " }}}
 
 " Key mapping {{{
@@ -335,7 +342,41 @@
 
   "* General {{{
     Plug 'Shougo/vimproc.vim', { 'do': 'make' } " REQUIRED!
-    Plug 'https://github.com/mhinz/vim-startify'
+    "+ startify {{{
+      Plug 'https://github.com/mhinz/vim-startify'
+
+      "- config {{{
+        let g:startify_lists = [
+          \   { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
+          \   { 'type': 'sessions',  'header': ['   Sessions']       },
+          \   { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+          \   { 'type': 'commands',  'header': ['   Commands']       },
+          \ ]
+
+        let g:startify_bookmarks = [
+          \   { 'c': '~/.dotfiles/vim/init.vim' },
+          \ ]
+
+        let g:startify_commands = [
+          \   { '--- ======= ---': '' },
+          \   { '--- Private ---': '' },
+          \   { '--- ======= ---': '' },
+          \   { 'xm': ['   Market maker (bot)', 'cd ~/development/market-maker-bot | bd'] },
+          \   { 'xmc': ['   Market maker (client)', 'cd ~/development/market-maker-client | bd'] },
+          \   { 'xml': ['   Market maker (lib)', 'cd ~/development/market-maker-lib | bd'] },
+          \   { '--- ===== ---': '' },
+          \   { '--- DHIS2 ---': '' },
+          \   { '--- ===== ---': '' },
+          \   { 'xdn': ['   Notes', 'cd ~/development/dhis2/notes | bd'] },
+          \   { 'xdm': ['   Maintenance app', 'cd ~/development/dhis2/maintenance-app | bd'] },
+          \   { 'xdr': ['   Reports app', 'cd ~/development/dhis2/reports-app | bd'] },
+          \   { 'xduc': ['  ui-core', 'cd ~/development/dhis2/ui-core | bd'] },
+          \   { 'xduw': ['  ui-widgets', 'cd ~/development/dhis2/ui-widgets | bd'] },
+          \   { 'xdpt': ['  prop-types', 'cd ~/development/dhis2/prop-types | bd'] },
+          \   { 'xdoom': [' Project doom', 'cd ~/development/dhis2/project-doom | bd'] },
+          \ ]
+      "}}}
+    "}}}
   "* }}}
 
   "* Git time tracking {{{
@@ -343,8 +384,21 @@
   "* }}}
 
   "* Auto completion {{{
-    Plug 'Shougo/deoplete.nvim' " Autocomplete + suggestions
-    Plug 'Valloric/YouCompleteMe', { 'do': 'python install.py --all' }
+    "+ deoplete {{{
+      Plug 'Shougo/deoplete.nvim' " Autocomplete + suggestions
+
+      "- config {{{
+        inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+        inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+      "}}}
+    "}}}
+    "+ YouCompleteMe {{{
+      Plug 'Valloric/YouCompleteMe', { 'do': 'python install.py --all' }
+
+      "- config {{{
+        set completeopt-=preview
+      "}}}
+    "}}}
     Plug 'mattn/emmet-vim'
   "* }}}
 
@@ -362,14 +416,107 @@
   "* }}}
         
   "* File browsing {{{
-    Plug 'scrooloose/nerdtree'
-    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-    Plug 'junegunn/fzf.vim'
+    "+ nerdtree {{{
+      Plug 'scrooloose/nerdtree'
+
+      "- config {{{
+        let NERDTreeShowHidden=1
+        let NERDTreeMinimalUI = 1
+        let NERDTreeDirArrows = 1
+        let NERDTreeAutoDeleteBuffer = 1
+        let g:NERDTreeNodeDelimiter = "\u00a0"
+
+        " Start NERDTree
+        " autocmd VimEnter * NERDTree
+
+        " Go to previous (last accessed) window.
+        autocmd VimEnter * wincmd p
+
+        """""""""""""""
+        "
+        " Custom mappings
+        "
+        """""""""""""""
+
+        " Open NERDTree
+        nnoremap <C-n> :NERDTreeToggle<CR>
+
+        "open a nerdtree when vim starts
+        " autocmd vimenter * call s:CheckToOpenNERDTree()
+        " Go to previous (last accessed) window.
+        autocmd VimEnter * wincmd p
+
+        function! s:CheckToOpenNERDTree() abort
+          "don't open nerdtree for gitcommits
+          if &ft == 'gitcommit' || &ft == 'gitrebase'
+            return
+          endif
+
+          NERDTree
+        endfunction
+      "}}}
+    "}}}
+    "+ fzf {{{
+      Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+      Plug 'junegunn/fzf.vim'
+
+      "- config {{{
+        let g:fzf_buffers_jump = 1
+
+        nnoremap <silent> <Space><Space> :Buffers<enter>
+        nnoremap <silent> <Space>t :Ag<enter>
+        nnoremap <silent> <Space>f :Files<enter>
+
+        " plugins
+
+        vnoremap <leader>s "hy:Ag <C-r>h<Enter>
+        vnoremap <leader>S "hy:Agf <C-r>h<Enter>
+
+        " Make :Ag search content only and ignore file names
+        command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
+        command! -bang -nargs=* Agf call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth ..2'}, <bang>0)
+
+        nnoremap <Space>s :call AgUnderCursor()<Enter>
+        nnoremap <Space>S :call AgfUnderCursor()<Enter>
+
+        fu! AgUnderCursor()
+          let wordUnderCursor = expand("<cword>")
+
+          if len(wordUnderCursor) > 0
+            execute printf(':Ag %s', wordUnderCursor)
+          else
+            echo "No word under cursor"
+          endif
+        endfu
+
+        fu! AgfUnderCursor()
+          let wordUnderCursor = expand("<cword>")
+
+          if len(wordUnderCursor) > 0
+            execute printf(':Agf %s', wordUnderCursor)
+          else
+            echo "No word under cursor"
+          endif
+        endfu
+      "}}}
+    "}}}
   "* }}}
 
   "* Gui {{{
+    "+ vim-airline {{{
+      Plug 'vim-airline/vim-airline'
+
+      "- config {{{
+        let g:airline_theme='term'
+        let g:airline#extensions#tabline#enabled = 1
+        let g:airline#extensions#tabline#buffer_nr_show = 1
+        let g:airline#extensions#branch#enabled = 0
+        let g:airline#extensions#tabline#fnamemod = ':t'
+        let g:airline_powerline_fonts = 1
+      "}}}
+    "}}}
+
     Plug 'altercation/vim-colors-solarized'
-    Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
     Plug 'ryanoasis/vim-devicons'
     Plug 'Yggdroot/indentLine'
@@ -380,15 +527,44 @@
   "* }}}
 
   "* All languages {{{
-    Plug 'SirVer/ultisnips'
+    "+ ultisnips {{{
+      Plug 'SirVer/ultisnips'
+
+      "- config {{{
+        " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+        let g:UltiSnipsExpandTrigger="<c-space>"
+        let g:UltiSnipsJumpForwardTrigger="<c-b>"
+        let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+        " If you want :UltiSnipsEdit to split your window.
+        let g:UltiSnipsEditSplit="vertical"
+      "}}}
+    "}}}
     Plug 'honza/vim-snippets'
     Plug 'jhkersul/vim-jest-snippets'
     Plug 'terryma/vim-expand-region'
-    "Plug 'kien/rainbow_parentheses.vim'
+    "+ rainbow_parantheses {{{
+      " Plug 'kien/rainbow_parentheses.vim'
+
+      " "- config {{{
+      "   au VimEnter * RainbowParenthesesToggle
+      "   au Syntax * RainbowParenthesesLoadRound
+      "   au Syntax * RainbowParenthesesLoadSquare
+      "   au Syntax * RainbowParenthesesLoadBraces
+      " "}}}
+    "}}}
     Plug 'tpope/vim-surround'
     Plug 'jiangmiao/auto-pairs'
     Plug 'scrooloose/nerdcommenter'
-    Plug 'prettier/vim-prettier'
+    "+ prettier {{{
+      Plug 'prettier/vim-prettier'
+
+      "- config {{{
+        let g:prettier#autoformat = 0
+        let g:prettier#config#single_quote = 'true'
+        let g:prettier#config#config_precedence = 'file-override'
+      "}}}
+    "}}}
     Plug 'editorconfig/editorconfig-vim'
   "* }}}
 
@@ -405,7 +581,14 @@
   "* }}}
 
   "* JavaScript {{{
-    Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+    "+ vim-javascript {{{
+      Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+
+      "- config {{{
+        let g:javascript_plugin_jsdoc = 1
+      "}}}
+    "}}}
+    "
     Plug 'ternjs/tern_for_vim', { 'do': 'cd ~/.vim/plugged/tern_for_vim/ && npm install', 'for': 'javascript' }
     Plug 'alampros/vim-styled-jsx'
     Plug 'Galooshi/vim-import-js', { 'for': 'javascript' }
@@ -413,7 +596,32 @@
 
   "* TypeScript {{{
     Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
-    Plug 'Quramy/tsuquyomi', { 'for': [ 'javascript', 'typescript' ] }
+    "+ tsuquyomi {{{
+      Plug 'Quramy/tsuquyomi', { 'for': [ 'javascript', 'typescript' ] }
+
+      "- config {{{
+        " Tsuquyomi settings
+        let g:tsuquyomi_disable_quickfix = 1
+        let g:tsuquyomi_completion_detail = 0
+        let g:tsuquyomi_shortest_import_path = 1
+
+        " enable tooltip for symbol under cursor
+        autocmd FileType typescript nnoremap <buffer> <space>t : <C-u>echo tsuquyomi#hint()<CR>
+
+        " reload buffer of new files
+        augroup reload_tsu_buffer
+          autocmd!
+          autocmd BufLeave *.ts TsuReload
+          autocmd BufLeave *.tsx TsuReload
+        augroup END
+
+        command! ResetTsu execute "TsuquyomiStopServer" | execute "TsuquyomiStartServer" | execute "TsuquyomiOpen"
+        augroup tsuquyomi_reset
+          au!
+          au BufEnter,WinEnter,WinNew typescript execute "ResetTsu"
+        augroup END
+      "}}}
+    "}}}
   "* }}}
 
   "* @TODO {{{
@@ -422,25 +630,6 @@
   "* }}}
 
   call plug#end()
-
-"" }}}
-
-" Plugin config imports {{{
-" ========================================================
-" ========================================================
-" ========================================================
-
-  source $HOME/.dotfiles/vim/src/plugin_config/airline.vim
-  source $HOME/.dotfiles/vim/src/plugin_config/ctrlp.vim
-  source $HOME/.dotfiles/vim/src/plugin_config/deoplete.vim
-  source $HOME/.dotfiles/vim/src/plugin_config/fzf.vim
-  source $HOME/.dotfiles/vim/src/plugin_config/nerd_tree.vim
-  "source $HOME/.dotfiles/vim/src/plugin_config/rainbow_parentheses.vim
-  source $HOME/.dotfiles/vim/src/plugin_config/tsuquyomi.vim
-  source $HOME/.dotfiles/vim/src/plugin_config/ultisnips.vim
-  source $HOME/.dotfiles/vim/src/plugin_config/you_complete_me.vim
-  source $HOME/.dotfiles/vim/src/plugin_config/prettier.vim
-  source $HOME/.dotfiles/vim/src/plugin_config/startify.vim
 
 " }}}
 
