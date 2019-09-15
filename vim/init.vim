@@ -419,6 +419,7 @@
     Plug 'tpope/vim-fugitive' " Git Wrapper
     Plug 'mbbill/undotree'
     Plug 'nathanaelkane/vim-indent-guides'
+    Plug 'wincent/ferret' " Search & replace
   "* }}}
         
   "* Editor behaviour {{{
