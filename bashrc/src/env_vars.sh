@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# flameshot
+
+export FLAMESHOT_DIR=~/Pictures/screenshots
+
 export EDITOR=/usr/bin/nvim
 export BROWSER=/usr/bin/chromium
 
