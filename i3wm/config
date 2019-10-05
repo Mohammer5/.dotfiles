@@ -47,6 +47,10 @@ bindsym $mod+Shift+u exec setxkbmap us
 bindsym $mod+F12 exec "scrot 'i3_screenshot_%Y-%m-%d-%H-%M-%S.jpg' -e 'mv $f ~/Pictures/screenshots' && notify-send 'Screenshot: Fullscreen'"
 bindsym $mod+F11 exec "scrot -u 'i3_screenshot_%Y-%m-%d-%H-%M-%S.jpg' -e 'mv $f ~/Pictures/screenshots' && notify-send 'Screenshot: Current Window'"
 
+exec_always --no-startup-id "bash ~/.dotfiles/flameshot/reset_save_dir.sh"
+bindsym $mod+Shift+F10 exec "zenity --file-selection --directory > ~/.dotfiles/flameshot/save_dir.txt"
+bindsym $mod+F10 exec "cat ~/.dotfiles/flameshot/save_dir.txt | xargs -I % sh -c 'flameshot gui -p %'"
+
 ################################################################################################
 ## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
 ################################################################################################
