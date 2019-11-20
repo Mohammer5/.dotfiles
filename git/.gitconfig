@@ -22,7 +22,7 @@
   la = log --author="Gerke"
   lan = la -n
   mb = merge-base
-  poH = push origin HEAD
+  poH = push origin HEAD -f
   unc = reset HEAD~
   rao = remote add origin
   s = status
