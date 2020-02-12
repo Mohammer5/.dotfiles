@@ -1,4 +1,4 @@
 {
-    "baseUrl": "https://debug.dhis2.org/2.30",
+    "baseUrl": "https://play.dhis2.org/2.30",
     "authorization": "Basic YWRtaW46ZGlzdHJpY3Q="
 }
