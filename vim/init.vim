@@ -100,6 +100,14 @@
 
   "* }}}
 
+  "* Key mapping -> Text navigation {{{
+  "* ========================================================
+
+  " Jumping to start of line
+  nnoremap <space>0 ^
+
+  "* }}}
+
   "* Key mapping -> Line handling {{{
   "* ========================================================
 
@@ -148,11 +156,18 @@
 
   "* }}}
 
-  "* Key mapping -> Search {{{
+  "* Key mapping -> Search & Replace {{{
   "* ========================================================
 
   " toggle highlight search
   nnoremap <leader>hs :set hlsearch!<Enter>
+
+  function! RenamerNerdTree()
+    :silent call NERDTreeClipPath()
+    let reg = getreg()
+    ":echo reg
+    :execute "Renamer" reg
+  endfunction
 
   " }}}
 
@@ -166,14 +181,6 @@
   vnoremap <leader>sl : ! awk '{ print length(), $0 \| "sort -n \| cut -d\\  -f2-" }'<CR>
 
   "* }}}
-
-  "* Key mapping -> Importing {{{
-  "* ========================================================
-
-  " Tsuquyoki
-  nnoremap <A-Enter> :TsuImport<Enter>
-
-  :" }}}
 
   "* Key mapping -> surround handlers {{{
   "* ========================================================
@@ -191,6 +198,15 @@
   nnoremap <M-S-k> :res -5<CR>
   nnoremap <M-S-h> :vertical resize -5<CR>
   nnoremap <M-S-l> :vertical resize +5<CR>
+
+  :" }}}
+
+  "* Key mapping -> Copy and pasting {{{
+  "* ========================================================
+
+  " Delete surrounding html tag
+  nnoremap <leader>v "_dP
+  vnoremap <C-v> "_dP
 
   :" }}}
 
@@ -355,64 +371,23 @@
 
   "* General {{{
     Plug 'Shougo/vimproc.vim', { 'do': 'make' } " REQUIRED!
-    "+ startify {{{
-      Plug 'https://github.com/mhinz/vim-startify'
-
-      "- config {{{
-        let g:startify_lists = [
-          \   { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
-          \   { 'type': 'sessions',  'header': ['   Sessions']       },
-          \   { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
-          \   { 'type': 'commands',  'header': ['   Commands']       },
-          \ ]
-
-        let g:startify_bookmarks = [
-          \   { 'c': '~/.dotfiles/vim/init.vim' },
-          \ ]
-
-        let g:startify_commands = [
-          \   { '--- ======= ---': '' },
-          \   { '--- Private ---': '' },
-          \   { '--- ======= ---': '' },
-          \   { 'xm': ['   Market maker (bot)', 'cd ~/development/market-maker-bot | bd'] },
-          \   { 'xmc': ['   Market maker (client)', 'cd ~/development/market-maker-client | bd'] },
-          \   { 'xml': ['   Market maker (lib)', 'cd ~/development/market-maker-lib | bd'] },
-          \   { '--- ===== ---': '' },
-          \   { '--- DHIS2 ---': '' },
-          \   { '--- ===== ---': '' },
-          \   { 'xdn': ['   Notes', 'cd ~/development/dhis2/notes | bd'] },
-          \   { 'xdm': ['   Maintenance app', 'cd ~/development/dhis2/maintenance-app | bd'] },
-          \   { 'xdr': ['   Reports app', 'cd ~/development/dhis2/reports-app | bd'] },
-          \   { 'xduc': ['  ui-core', 'cd ~/development/dhis2/ui-core | bd'] },
-          \   { 'xduw': ['  ui-widgets', 'cd ~/development/dhis2/ui-widgets | bd'] },
-          \   { 'xdpt': ['  prop-types', 'cd ~/development/dhis2/prop-types | bd'] },
-          \   { 'xdoom': [' Project doom', 'cd ~/development/dhis2/project-doom | bd'] },
-          \ ]
-      "}}}
-    "}}}
-  "* }}}
-
-  "* Git time tracking {{{
-    Plug 'git-time-metric/gtm-vim-plugin'
   "* }}}
 
   "* Auto completion {{{
     "+ deoplete {{{
       Plug 'Shougo/deoplete.nvim' " Autocomplete + suggestions
 
-      "- config {{{
-        inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-        inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
-      "}}}
+      inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+      inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
     "}}}
+
     "+ YouCompleteMe {{{
       Plug 'Valloric/YouCompleteMe', { 'do': 'python install.py --all' }
 
-      "- config {{{
-        set completeopt-=preview
-      "}}}
+      set completeopt-=preview
     "}}}
-    Plug 'mattn/emmet-vim'
+
+    Plug 'mattn/emmet-vim', { 'for': [ 'html', 'jsx', 'tsx' ] }
   "* }}}
 
   "* Editor enhancement {{{
@@ -421,10 +396,11 @@
     Plug 'mbbill/undotree'
     Plug 'nathanaelkane/vim-indent-guides'
     Plug 'wincent/ferret' " Search & replace
+    Plug 'qpkorr/vim-renamer' " Batch renaming
+    Plug 'mortonfox/nerdtree-clip'
   "* }}}
         
   "* Editor behaviour {{{
-    Plug 'vim-scripts/vim-auto-save'
     Plug 'christoomey/vim-tmux-navigator'
     Plug 'wesQ3/vim-windowswap'
   "* }}}
@@ -433,116 +409,94 @@
     "+ nerdtree {{{
       Plug 'scrooloose/nerdtree'
 
-      "- config {{{
-        let NERDTreeShowHidden=1
-        let NERDTreeMinimalUI = 1
-        let NERDTreeDirArrows = 1
-        let NERDTreeAutoDeleteBuffer = 1
-        let g:NERDTreeNodeDelimiter = "\u00a0"
+      let NERDTreeShowHidden=1
+      let NERDTreeMinimalUI = 1
+      let NERDTreeDirArrows = 1
+      let NERDTreeAutoDeleteBuffer = 1
+      let g:NERDTreeNodeDelimiter = "\u00a0"
 
-        " Start NERDTree
-        " autocmd VimEnter * NERDTree
+      """""""""""""""
+      "
+      " Custom mappings
+      "
+      """""""""""""""
 
-        " Go to previous (last accessed) window.
-        autocmd VimEnter * wincmd p
+      " Open NERDTree
+      nnoremap <C-n> :NERDTreeToggle<CR>
 
-        """""""""""""""
-        "
-        " Custom mappings
-        "
-        """""""""""""""
+      "open a nerdtree when vim starts
+      " autocmd vimenter * call s:CheckToOpenNERDTree()
 
-        " Open NERDTree
-        nnoremap <C-n> :NERDTreeToggle<CR>
+      function! s:CheckToOpenNERDTree() abort
+        "don't open nerdtree for gitcommits
+        if &ft == 'gitcommit' || &ft == 'gitrebase'
+          return
+        endif
 
-        "open a nerdtree when vim starts
-        " autocmd vimenter * call s:CheckToOpenNERDTree()
-        " Go to previous (last accessed) window.
-        autocmd VimEnter * wincmd p
-
-        function! s:CheckToOpenNERDTree() abort
-          "don't open nerdtree for gitcommits
-          if &ft == 'gitcommit' || &ft == 'gitrebase'
-            return
-          endif
-
-          NERDTree
-        endfunction
-      "}}}
+        NERDTree
+      endfunction
     "}}}
+
     "+ fzf {{{
       Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
       Plug 'junegunn/fzf.vim'
 
-      "- config {{{
-        let g:fzf_buffers_jump = 1
+      let g:fzf_buffers_jump = 1
 
-        nnoremap <silent> <Space><Space> :Buffers<enter>
-        nnoremap <silent> <Space>t :Ag<enter>
-        nnoremap <silent> <Space>f :Files<enter>
+      nnoremap <silent> <Space><Space> :Buffers<enter>
+      nnoremap <silent> <Space>t :Ag<enter>
+      nnoremap <silent> <Space>T :Agf<enter>
+      nnoremap <silent> <Space>f :Files<enter>
 
-        " plugins
+      " Make :Ag search content only and ignore file names
+      command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
+      command! -bang -nargs=* Agf call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth ..2'}, <bang>0)
 
-        vnoremap <leader>s "hy:Ag <C-r>h<Enter>
-        vnoremap <leader>S "hy:Agf <C-r>h<Enter>
+      nnoremap <Space>s :call AgUnderCursor()<Enter>
+      nnoremap <Space>S :call AgfUnderCursor()<Enter>
 
-        " Make :Ag search content only and ignore file names
-        command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
-        command! -bang -nargs=* Agf call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth ..2'}, <bang>0)
+      fu! AgUnderCursor()
+        let wordUnderCursor = expand("<cword>")
 
-        nnoremap <Space>s :call AgUnderCursor()<Enter>
-        nnoremap <Space>S :call AgfUnderCursor()<Enter>
+        if len(wordUnderCursor) > 0
+          execute printf(':Ag %s', wordUnderCursor)
+        else
+          echo "No word under cursor"
+        endif
+      endfu
 
-        fu! AgUnderCursor()
-          let wordUnderCursor = expand("<cword>")
+      fu! AgfUnderCursor()
+        let wordUnderCursor = expand("<cword>")
 
-          if len(wordUnderCursor) > 0
-            execute printf(':Ag %s', wordUnderCursor)
-          else
-            echo "No word under cursor"
-          endif
-        endfu
-
-        fu! AgfUnderCursor()
-          let wordUnderCursor = expand("<cword>")
-
-          if len(wordUnderCursor) > 0
-            execute printf(':Agf %s', wordUnderCursor)
-          else
-            echo "No word under cursor"
-          endif
-        endfu
-      "}}}
+        if len(wordUnderCursor) > 0
+          execute printf(':Agf %s', wordUnderCursor)
+        else
+          echo "No word under cursor"
+        endif
+      endfu
     "}}}
   "* }}}
 
   "* Gui {{{
     "+ vim-airline {{{
-      Plug 'vim-airline/vim-airline'
+      " Plug 'vim-airline/vim-airline'
 
-      "- config {{{
-        let g:airline_theme='term'
-        let g:airline#extensions#tabline#enabled = 1
-        let g:airline#extensions#tabline#buffer_nr_show = 1
-        let g:airline#extensions#branch#enabled = 0
-        let g:airline#extensions#tabline#fnamemod = ':t'
-        let g:airline_powerline_fonts = 1
-      "}}}
+      " let g:airline_theme='term'
+      " let g:airline#extensions#tabline#enabled = 1
+      " let g:airline#extensions#tabline#buffer_nr_show = 1
+      " let g:airline#extensions#branch#enabled = 0
+      " let g:airline#extensions#tabline#fnamemod = ':t'
+      " let g:airline_powerline_fonts = 1
     "}}}
 
-    Plug 'altercation/vim-colors-solarized'
     Plug 'vim-airline/vim-airline-themes'
     Plug 'ryanoasis/vim-devicons'
     Plug 'Yggdroot/indentLine'
   "* }}}
 
-  "* Terminal emulations {{{
-    Plug 'knubie/vim-kitty-navigator'
-  "* }}}
-
   "* All languages {{{
     "+ ultisnips {{{
-      Plug 'SirVer/ultisnips'
+      Plug 'SirVer/ultisnips', { 'for': [ 'javascript', 'typescript' ] }
 
       "- config {{{
         " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
@@ -554,40 +508,31 @@
         let g:UltiSnipsEditSplit="vertical"
       "}}}
     "}}}
+
     Plug 'honza/vim-snippets'
     Plug 'jhkersul/vim-jest-snippets'
     Plug 'terryma/vim-expand-region'
-    "+ rainbow_parantheses {{{
-      " Plug 'kien/rainbow_parentheses.vim'
-
-      " "- config {{{
-      "   au VimEnter * RainbowParenthesesToggle
-      "   au Syntax * RainbowParenthesesLoadRound
-      "   au Syntax * RainbowParenthesesLoadSquare
-      "   au Syntax * RainbowParenthesesLoadBraces
-      " "}}}
-    "}}}
     Plug 'tpope/vim-surround'
     Plug 'jiangmiao/auto-pairs'
     Plug 'scrooloose/nerdcommenter'
+
     "+ prettier {{{
       Plug 'prettier/vim-prettier'
 
-      "- config {{{
-        let g:prettier#autoformat = 0
-        let g:prettier#config#single_quote = 'true'
-        let g:prettier#config#config_precedence = 'file-override'
-      "}}}
+      let g:prettier#autoformat = 0
+      let g:prettier#config#single_quote = 'true'
+      let g:prettier#config#config_precedence = 'file-override'
     "}}}
+
     Plug 'editorconfig/editorconfig-vim'
   "* }}}
 
   "* CSS {{{
-    Plug 'ap/vim-css-color'
+    Plug 'ap/vim-css-color', { 'for': [ 'css' ] }
   "* }}}
 
   "* SCSS {{{
-    Plug 'cakebaker/scss-syntax.vim'
+    Plug 'cakebaker/scss-syntax.vim', { 'for': [ 'scss' ] }
   "* }}}
 
   "* JavaScript and TypeScript {{{
@@ -595,14 +540,7 @@
   "* }}}
 
   "* JavaScript {{{
-    "+ vim-javascript {{{
-      Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-
-      "- config {{{
-        let g:javascript_plugin_jsdoc = 1
-      "}}}
-    "}}}
-    "
+    Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
     Plug 'ternjs/tern_for_vim', { 'do': 'cd ~/.vim/plugged/tern_for_vim/ && npm install', 'for': 'javascript' }
     Plug 'alampros/vim-styled-jsx'
     Plug 'Galooshi/vim-import-js', { 'for': 'javascript' }
@@ -610,32 +548,7 @@
 
   "* TypeScript {{{
     Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
-    "+ tsuquyomi {{{
-      Plug 'Quramy/tsuquyomi', { 'for': [ 'javascript', 'typescript' ] }
-
-      "- config {{{
-        " Tsuquyomi settings
-        let g:tsuquyomi_disable_quickfix = 1
-        let g:tsuquyomi_completion_detail = 0
-        let g:tsuquyomi_shortest_import_path = 1
-
-        " enable tooltip for symbol under cursor
-        autocmd FileType typescript nnoremap <buffer> <space>t : <C-u>echo tsuquyomi#hint()<CR>
-
-        " reload buffer of new files
-        augroup reload_tsu_buffer
-          autocmd!
-          autocmd BufLeave *.ts TsuReload
-          autocmd BufLeave *.tsx TsuReload
-        augroup END
-
-        command! ResetTsu execute "TsuquyomiStopServer" | execute "TsuquyomiStartServer" | execute "TsuquyomiOpen"
-        augroup tsuquyomi_reset
-          au!
-          au BufEnter,WinEnter,WinNew typescript execute "ResetTsu"
-        augroup END
-      "}}}
-    "}}}
+    Plug 'Quramy/tsuquyomi', { 'for': [ 'javascript', 'typescript' ] }
   "* }}}
 
   "* @TODO {{{
