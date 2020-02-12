@@ -28,10 +28,10 @@ font pango:DejaVu Sans Mono 10
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec ~/.local/kitty.app/bin/kitty -o allow_remote_control=yes --listen-on unix:/tmp/mykitty
+bindsym $mod+Return exec kitty -o allow_remote_control=yes --listen-on unix:/tmp/mykitty
 
 # kill focused window
-bindsym $mod+BackSpace kill
+bindsym $mod+Shift+q kill
 
 # start program launcher
 bindsym $mod+d exec --no-startup-id dmenu_recency
@@ -50,6 +50,9 @@ bindsym $mod+F11 exec "scrot -u 'i3_screenshot_%Y-%m-%d-%H-%M-%S.jpg' -e 'mv $f 
 exec_always --no-startup-id "bash ~/.dotfiles/flameshot/reset_save_dir.sh"
 bindsym $mod+Shift+F10 exec "zenity --file-selection --directory > ~/.dotfiles/flameshot/save_dir.txt"
 bindsym $mod+F10 exec "cat ~/.dotfiles/flameshot/save_dir.txt | xargs -I % sh -c 'flameshot gui -p %'"
+
+# screen recording
+bindsym $mod+F9 exec "peek"
 
 ################################################################################################
 ## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
