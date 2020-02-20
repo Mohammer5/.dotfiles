@@ -208,6 +208,24 @@
   nnoremap <leader>v "_dP
   vnoremap <C-v> "_dP
 
+  function! CopyCurrentBufferPath()
+    :redir @+
+    :silent echo expand("%")
+    :redir END
+  endfunction
+  
+  nnoremap <silent> <space>yp :call CopyCurrentBufferPath()<CR>
+
+  :" }}}
+
+  "* Key mapping -> Javascript helpers {{{
+  "* ========================================================
+
+  " Cypress cucumber
+  nnoremap <space>given 0c$Given('', () => {})<esc>
+  nnoremap <space>when 0c$When('', () => {})<esc>
+  nnoremap <space>then 0c$Then('', () => {})<esc>
+      
   :" }}}
 
 " }}}
@@ -549,6 +567,10 @@
   "* TypeScript {{{
     Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
     Plug 'Quramy/tsuquyomi', { 'for': [ 'javascript', 'typescript' ] }
+  "* }}}
+
+  "* Clojure {{{
+    Plug 'guns/vim-sexp', { 'for': [ 'clojure' ] }
   "* }}}
 
   "* @TODO {{{

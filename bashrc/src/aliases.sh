@@ -32,6 +32,9 @@ alias xduw="cd ~/development/dhis2/ui-widgets"
 alias xduf="cd ~/development/dhis2/ui-forms"
 alias xdoom="cd ~/development/dhis2/project-doom"
 
+# Dir creation
+alias mkdir="mkdir -p"
+
 # Wallpaper
 alias setwp="feh --bg-scale $HOME/.dotfiles/i3wm/wallpapers/flat-hexagon-wallpaper.jpg"
 

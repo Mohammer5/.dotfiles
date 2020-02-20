@@ -1,0 +1,24 @@
+# Install nvidia drivers
+
+https://wiki.debian.org/NvidiaGraphicsDrivers#Debian_10_.22Buster.22
+
+# Install firmware
+
+Make sure non-free is in the /etc/ap/sources.list
+sudo apt install firmware-linux firmware-linux-nonfree
+And reboot
+
+# Install i3
+
+sudo apt install i3
+And reboot
+
+# Install nodejs
+
+Install latest version, follow the instructions for the latest version:
+https://github.com/nodesource/distributions/blob/master/README.md
+
+Install yarn, follow the instruction:
+https://classic.yarnpkg.com/en/docs/install/#debian-stable
+
+# Install git
