@@ -4,9 +4,9 @@ https://wiki.debian.org/NvidiaGraphicsDrivers#Debian_10_.22Buster.22
 
 # Install firmware
 
-Make sure non-free is in the /etc/ap/sources.list
+echo "Make sure non-free is in the /etc/ap/sources.list"
 sudo apt install firmware-linux firmware-linux-nonfree
-And reboot
+echo "And reboot"
 
 # Install i3
 
@@ -22,3 +22,18 @@ Install yarn, follow the instruction:
 https://classic.yarnpkg.com/en/docs/install/#debian-stable
 
 # Install git
+
+sudo apt install git
+
+# Install neovim
+
+sudo apt install neovim python-neovim python3-neovim
+
+# Install fish and set as default shell
+
+curl -L github.com/oh-my-fish/oh-my-fish/raw/master/bin/install | fish
+chsh -s `which fish`
+logout -> login
+
+Change theme
+omf install coffeeandcode
