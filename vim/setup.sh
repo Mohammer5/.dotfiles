@@ -105,11 +105,12 @@ if [ "$SETUP_NEOVIM" = true ]; then
   fi
 
   mkdir -p ~/.config/nvim 2> /dev/null
+  mkdir -p ~/.vim 2> /dev/null
   rm ~/.config/nvim/init.vim 2> /dev/null
   rm -Rf ~/.config/nvim/colors 2> /dev/null
-  ln -s $DOT_FILES/vim/init.vim ~/.config/nvim/init.vim
-  ln -s $DOT_FILES/vim/src/colors ~/.config/nvim/colors
-  ln -s $DOT_FILES/vim/src/ftplugins ~/.config/nvim/ftplugins
+  ln -s ~/.dotfiles/vim/init.vim ~/.config/nvim/init.vim
+  ln -s ~/.dotfiles/vim/src/colors ~/.config/nvim/colors
+  ln -s ~/.dotfiles/vim/src/ftplugins ~/.config/nvim/ftplugins
   ln -s ~/.config/nvim/ftplugins ~/.vim/ftplugins
 
   curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim

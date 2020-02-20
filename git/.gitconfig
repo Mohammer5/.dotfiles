@@ -52,4 +52,4 @@
 	helper = store
 [core]
 	editor = nvim
-	excludesfile = ~/.dotfiles/git/.gitignore_global
+	excludesfile = /home/gerkules/.gitignore_global

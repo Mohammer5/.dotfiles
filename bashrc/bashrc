@@ -1,11 +1,7 @@
-export DOT_FILES=$HOME/.dotfiles
-export BASHRC_CONFIG_DIR=$DOT_FILES/bashrc/src
-
-source $BASHRC_CONFIG_DIR/env_vars.sh
-source $BASHRC_CONFIG_DIR/aliases.sh
-source $BASHRC_CONFIG_DIR/path.sh
-#source $BASHRC_CONFIG_DIR/shell_options.sh
-source $BASHRC_CONFIG_DIR/tab_completion.sh
+source ~/.dotfiles/bashrc/src/env_vars.sh
+source ~/.dotfiles/bashrc/src/aliases.sh
+source ~/.dotfiles/bashrc/src/path.sh
+source ~/.dotfiles/bashrc/src/tab_completion.sh
 
 if test -e ~/.fzf.bash
   source ~/.fzf.bash
@@ -13,6 +9,6 @@ end
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 set -U fish_user_paths ~/.rvm/bin
-if test -d $HOME/.rvm/scripts/rvm
-  source "$HOME/.rvm/scripts/rvm"
+if test -d ~/.rvm/scripts/rvm
+   source "~/.rvm/scripts/rvm"
 end

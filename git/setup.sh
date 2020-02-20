@@ -30,12 +30,8 @@ if [ "$SETUP_GIT" = true ]; then
     done
   fi
 
-  rm ~/.gitconfig 2> /dev/null
-  ln -s $DOT_FILES/git/.gitconfig ~/.gitconfig
-  
-  # install gtm
-  curl -Lo $TMP/gtm.tar.gz https://github.com/git-time-metric/gtm/releases/download/v1.3.5/gtm.v1.3.5.linux.tar.gz
-  tar -xvzf $TMP/gtm.tar.gz -C $TMP
-  mkdir $HOME/bin 2> /dev/null
-  cp $TMP/gtm $HOME/bin/
+  rm -f ~/.gitconfig ~/.gitignore_global
+  ln -s ~/.dotfiles/git/.gitconfig ~/.gitconfig
+  ln -s ~/.dotfiles/git/.gitignore_global ~/.gitignore_global
+  git config --global core.excludesfile ~/.gitignore_global
 fi
