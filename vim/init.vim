@@ -573,6 +573,10 @@
     Plug 'guns/vim-sexp', { 'for': [ 'clojure' ] }
   "* }}}
 
+  "* Clojure {{{
+    Plug 'jparise/vim-graphql'
+  "* }}}
+
   "* @TODO {{{
     " Plug 'vim-rooter'
     " Plug 'mkitt/tabline.vim'

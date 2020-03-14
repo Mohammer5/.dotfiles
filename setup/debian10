@@ -1,39 +1,102 @@
-# Install nvidia drivers
+######
+#
+# Nvidia drivers:
+# https://wiki.debian.org/NvidiaGraphicsDrivers#Debian_10_.22Buster.22
+#
+# nodejs & npm:
+# https://github.com/nodesource/distributions/blob/master/README.md
+#
+# yarn:
+# https://classic.yarnpkg.com/en/docs/install/#debian-stable
+#
+# slack:
+# https://slack.com/intl/de-de/downloads/linux
+#
+# spotify:
+# https://www.spotify.com/de/download/linux/
+#
+######
 
-https://wiki.debian.org/NvidiaGraphicsDrivers#Debian_10_.22Buster.22
+# Install software
 
-# Install firmware
+  apt update
+  sudo apt install software-properties-common
+  sudo apt-add-repository contrib
+  sudo apt-add-repository non-free
 
-echo "Make sure non-free is in the /etc/ap/sources.list"
-sudo apt install firmware-linux firmware-linux-nonfree
-echo "And reboot"
+  apt update
+  sudo apt install \
+    linux-headers-$(uname -r|sed 's/[^-]*-[^-]*-//') nvidia-driver \
+    cmake python3-dev \
+    firmware-linux firmware-linux-nonfree \
+    cups \
+    rofi i3 peek flameshot \
+    git `# git` \
+    neovim python-neovim python3-neovim fzf silversearcher-ag \
+    kitty \
+    telegram-desktop \
+    chromium tor \
+    default-jre \
+    gparted \
+    libgtk2.0-0
 
-# Install i3
+# Install fish
 
-sudo apt install i3
-And reboot
+  curl -L github.com/oh-my-fish/oh-my-fish/raw/master/bin/install | fish
+  chsh -s `which fish`
 
-# Install nodejs
+# Install nodejs & npm
 
-Install latest version, follow the instructions for the latest version:
-https://github.com/nodesource/distributions/blob/master/README.md
+  curl -sL https://deb.nodesource.com/setup_13.x | bash -
+  sudo apt install -y nodejs
 
-Install yarn, follow the instruction:
-https://classic.yarnpkg.com/en/docs/install/#debian-stable
+# Install yarn
 
-# Install git
+  curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+  echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+  sudo apt update && sudo apt install yarn
 
-sudo apt install git
+# install ty3status
 
-# Install neovim
+  git clone https://github.com/mrkmg/ty3status.git /tmp/ty3status
+  cd /tmp/ty3status
+  git checkout $(git describe --long --tags)
+  npm install
+  npm run build
+  sudo npm run system-install
 
-sudo apt install neovim python-neovim python3-neovim
+# Install slack
 
-# Install fish and set as default shell
+  wget https://downloads.slack-edge.com/linux_releases/slack-desktop-4.3.2-amd64.deb
+  sudo dpkg -i slack-desktop-4.3.2-amd64.deb
+  sudo apt --fix-broken install
 
-curl -L github.com/oh-my-fish/oh-my-fish/raw/master/bin/install | fish
-chsh -s `which fish`
-logout -> login
+# Install spotify
 
-Change theme
-omf install coffeeandcode
+  curl -sS https://download.spotify.com/debian/pubkey.gpg | sudo apt-key add - 
+  echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
+  sudo apt-get update
+  sudo apt-get install spotify-client
+
+# Install expressvpn
+
+  wget https://download.expressvpn.xyz/clients/linux/expressvpn_2.4.2-1_amd64.deb
+  sudo dpkg -i expressvpn_2.4.2-1_amd64.deb
+
+# Setup config files
+  
+  ln -s ~/.dotfiles/fish/config.fish ~/.config/fish/config.fish
+  ln -s ~/.dotfiles/kitty/kitty.conf ~/.config/kitty/kitty.conf
+
+# Reboot
+
+  reboot
+
+# Install expressvpn
+
+---
+
+# Firefox improvements
+
+Enable toolkit.legacyUserProfileCustomizations.stylesheets (about:config)
+Google for "Firefox hide tabs and add userChrome.css file"

@@ -2,8 +2,8 @@
 
 SETUP_I3=true
 
-if [[ ! -d ~/.i3 ]]; then
-  echo "The folder ~/.i3 does not exist. Do you want to setup i3 anyways?"
+if [[ ! -d ~/.config/i3 ]]; then
+  echo "The folder ~/.config/i3 does not exist. Do you want to setup i3 anyways?"
   read answer
 
   if [[ $answer == y* ]]; then
@@ -14,7 +14,7 @@ if [[ ! -d ~/.i3 ]]; then
 fi
 
 if [ "$SETUP_I3" = true ]; then
-  mkdir ~/.i3 2> /dev/null
+  mkdir ~/.config/i3 2> /dev/null
   rm ~/.i3/config 2> /dev/null
   ln -s ~/.dotfiles/i3wm/config ~/.i3/config
   i3-msg reload

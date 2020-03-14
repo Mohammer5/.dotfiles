@@ -34,7 +34,8 @@ bindsym $mod+Return exec kitty -o allow_remote_control=yes --listen-on unix:/tmp
 bindsym $mod+Shift+q kill
 
 # start program launcher
-bindsym $mod+d exec --no-startup-id dmenu_recency
+bindsym $mod+d exec --no-startup-id rofi -modi drun -show drun -matching fuzzy -sorting-method fzf -sort
+bindsym $mod+Tab exec --no-startup-id rofi -show window -matching fuzzy -sorting-method fzf -sort
 
 # launch categorized menu
 bindsym $mod+z exec --no-startup-id morc_menu
@@ -49,7 +50,7 @@ bindsym $mod+F11 exec "scrot -u 'i3_screenshot_%Y-%m-%d-%H-%M-%S.jpg' -e 'mv $f 
 
 exec_always --no-startup-id "bash ~/.dotfiles/flameshot/reset_save_dir.sh"
 bindsym $mod+Shift+F10 exec "zenity --file-selection --directory > ~/.dotfiles/flameshot/save_dir.txt"
-bindsym $mod+F10 exec "cat ~/.dotfiles/flameshot/save_dir.txt | xargs -I % sh -c 'flameshot gui -p %'"
+bindsym $mod+F10 exec "flameshot gui"
 
 # screen recording
 bindsym $mod+F9 exec "peek"
@@ -94,7 +95,7 @@ bindsym $mod+i $playprev
 # bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
 
 # Start Applications
-bindsym $mod+F2 exec chromium
+bindsym $mod+F2 exec firefox
 
 # change focus
 bindsym $mod+h focus left
@@ -357,8 +358,9 @@ for_window [class="^.*"] border pixel 3
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
 bar {
 	i3bar_command i3bar
-	status_command i3status
-  height 25
+	#status_command i3status
+  status_command ty3status --config ~/.config/ty3status/ty3status.yaml
+  #height 25
 	position top
   # mode hide
 
@@ -401,9 +403,9 @@ bindsym $mod+m bar mode toggle
 #############################
 
 # Set inner/outer gaps
-gaps inner 10
+#gaps inner 10
 #gaps outer -4
-gaps outer 0
+#gaps outer 0
 
 # Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
 # gaps inner|outer current|all set|plus|minus <px>
@@ -411,11 +413,11 @@ gaps outer 0
 # gaps outer all plus 5
 
 # Smart gaps (gaps used if only more than one container on the workspace)
-smart_gaps on
+#smart_gaps on
 
 # Smart borders (draw borders around container only if it is not the only container on this workspace) 
 # on|no_gaps (on=always activate and no_gaps=only activate if the gap size to the edge of the screen is 0)
-smart_borders on
+#smart_borders on
 
 # Press $mod+Shift+g to enter the gap mode. Choose o or i for modifying outer/inner gaps. Press one of + / - (in-/decrement for current workspace) or 0 (remove gaps for current workspace). If you also press Shift with these keys, the change will be global for all workspaces.
 set $mode_gaps Gaps: (o) outer, (i) inner

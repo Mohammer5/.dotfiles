@@ -10,43 +10,67 @@ end
 
 alias b-source="source ~/.bashrc"
 
+##
+#
+# Utilities & command improvement
+#
+##
+
+  alias mkdir="mkdir -p"
+
+  # Dir info
+  alias ll='ls -Flh --group-directories-first'
+
+  # System Info
+  alias df='df -h'                             # human-readable sizes
+  alias freem='free -m'                        # show sizes in MB
+
+  # Applications
+  alias g="git"
+
+##
+# 
+# Printing
+#
+##
+
+  # print multiple in path
+  # alias printmp="find -type f -not -path '*.git/*' | fzf -m | sed -s 's/\(^'|'\$\)//g' | sed -s 's/\s/\\\ /g' | while read line; lp $line; end"
+
+##
+#
 # Dir navigation
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
+#
+##
 
-alias .='cd ~/.dotfiles'
-alias x="cd ~/development"
-alias xm="cd $DEV_DIR/market-maker-bot"
-alias xmc="cd $DEV_DIR/market-maker-client"
-alias xml="cd $DEV_DIR/market-maker-lib"
- 
-alias xd="cd ~/development/dhis2"
-alias xdi="cd ~/development/dhis2/import-export-app"
-alias xdm="cd ~/development/dhis2/maintenance-app"
-alias xdn="cd ~/development/dhis2_notes"
-alias xdpt="cd ~/development/dhis2/prop-types"
-alias xdr="cd ~/development/dhis2/reports-app"
-alias xduc="cd ~/development/dhis2/ui-core"
-alias xduw="cd ~/development/dhis2/ui-widgets"
-alias xduf="cd ~/development/dhis2/ui-forms"
-alias xdoom="cd ~/development/dhis2/project-doom"
+  alias    .='cd ~/.dotfiles'
+  alias   ..="cd .."
+  alias  ...="cd ../.."
+  alias ....="cd ../../.."
 
-# Dir creation
-alias mkdir="mkdir -p"
+  alias     d="cd ~/development/dhis2 && cd (ls -A1 | fzf)"
+  alias     x="cd ~/development/private && cd (ls -A1 | fzf)"
+  alias   dev="cd ~/development/private"
+  alias dhis2="cd ~/development/dhis2"
+
+  alias    xb="cd ~/development/private/market-maker"
+  alias   d2i="dhis2 && cd ./import-export-app"
+  alias   d2m="dhis2 && cd ./maintenance-app"
+  alias   d2n="dhis2 && cd ./notes"
+  alias  d2pt="dhis2 && cd ./prop-types"
+  alias   d2r="dhis2 && cd ./reports-app"
+  alias  d2uc="dhis2 && cd ./ui-core"
+  alias  d2uw="dhis2 && cd ./ui-widgets"
+  alias  d2uf="dhis2 && cd ./ui-forms"
+  alias d2mar="dhis2 && cd ./project-doom"
+
+# Dot files
+
+  alias dot=". && nvim (find . -type f -not -path '*.git/*' | fzf)"
 
 # Wallpaper
 alias setwp="feh --bg-scale $HOME/.dotfiles/i3wm/wallpapers/flat-hexagon-wallpaper.jpg"
 
-# Dir info
-alias ll='ls -Flh --group-directories-first'
-
-# System Info
-alias df='df -h'                             # human-readable sizes
-alias freem='free -m'                        # show sizes in MB
-
-# Applications
-alias g="git"
 alias tmux-source="tmux source ~/.tmux.conf"
 
 # Helpers
@@ -54,9 +78,17 @@ alias wrep="grep -Iwrm 1 --color"
 
 # Displays
 set MAIN_SCREEN "eDP1"
+
 alias h1onr="sudo xrandr --output HDMI1 --auto --right-of $MAIN_SCREEN && setwp"
 alias h1onl="sudo xrandr --output HDMI1 --auto --left-of $MAIN_SCREEN && setwp"
 alias h1off="sudo xrandr --output HDMI1 --off"
+
+function monleft
+  set MAIN "HDMI-0"
+  set MONITOR (xrandr | sed -n -e 's/^\(\S*\) connected.*$/\1/p' | fzf)
+  echo $MONITOR
+  sudo xrandr --output $MONITOR --auto --left-of $MAIN
+end
 
 # DHIS2 start
 

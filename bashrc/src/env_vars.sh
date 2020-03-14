@@ -5,7 +5,7 @@
 export FLAMESHOT_DIR=~/Pictures/screenshots
 
 export EDITOR=/usr/bin/nvim
-export BROWSER=/usr/bin/chromium
+export BROWSER=/usr/bin/firefox
 
 # Development
 export DEV_DIR=$HOME/development
