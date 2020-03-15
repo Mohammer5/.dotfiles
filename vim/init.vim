@@ -414,7 +414,6 @@
     Plug 'mbbill/undotree'
     Plug 'nathanaelkane/vim-indent-guides'
     Plug 'wincent/ferret' " Search & replace
-    Plug 'qpkorr/vim-renamer' " Batch renaming
     Plug 'mortonfox/nerdtree-clip'
   "* }}}
         

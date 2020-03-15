@@ -45,10 +45,16 @@
   curl -L github.com/oh-my-fish/oh-my-fish/raw/master/bin/install | fish
   chsh -s `which fish`
 
+# Install DejaVu mono font
+
+MONO_FONT_URL=https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/DejaVuSansMono/Regular/complete/DejaVu%20Sans%20Mono%20Nerd%20Font%20Complete%20Mono.ttf
+wget $MONO_FONT_URL && sudo mv DejaVu\ Sans\ Mono\ Nerd\ Font\ Complete\ Mono.ttf /usr/share/fonts/truetype/dejavu/
+
 # Install nodejs & npm
 
   curl -sL https://deb.nodesource.com/setup_13.x | bash -
   sudo apt install -y nodejs
+  sudo npm i -g --unsafe-perm import-js
 
 # Install yarn
 
