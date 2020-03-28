@@ -57,6 +57,7 @@
   augroup Foldmethod
     autocmd!
     autocmd Syntax vim setlocal foldmethod=marker
+    autocmd Syntax markdown setlocal foldmethod=marker
     autocmd Syntax scss.css setlocal foldmethod=indent
     "autocmd Syntax scss.css,javascript,javascript.jsx,typescript setlocal foldmethod=indent
   augroup END

@@ -38,7 +38,8 @@
     chromium tor \
     default-jre \
     gparted \
-    libgtk2.0-0
+    libgtk2.0-0 \
+    feh
 
 # Install fish
 
@@ -106,3 +107,6 @@ wget $MONO_FONT_URL && sudo mv DejaVu\ Sans\ Mono\ Nerd\ Font\ Complete\ Mono.tt
 
 Enable toolkit.legacyUserProfileCustomizations.stylesheets (about:config)
 Google for "Firefox hide tabs and add userChrome.css file"
+
+# Install i3-gaps
+

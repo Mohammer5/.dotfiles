@@ -458,4 +458,4 @@ mode "$mode_gaps_outer" {
 }
 
 # wallpaper
-exec_always feh --bg-scale $HOME/.dotfiles/i3wm/wallpapers/flat-hexagon-wallpaper.jpg
+exec_always feh --bg-scale $HOME/.dotfiles/i3wm/wallpapers/TranscodedWallpaper.jpg
