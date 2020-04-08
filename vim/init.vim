@@ -3,7 +3,7 @@
 " ========================================================
 " ========================================================
 
-  filetype plugin on
+  filetype plugin indent on
 
   if &compatible
     set nocompatible
@@ -44,8 +44,8 @@
   nnoremap <silent> <Space>k 5<C-W>-
 
   " Changing layout -> vertical/horizontal
-  nnoremap <silent> <leader>lh <C-w>t<C-w>K<CR>
-  nnoremap <silent> <leader>lv <C-w>t<C-w>H<CR>
+  nnoremap <silent> <Space>lh <C-w>t<C-w>K<CR>
+  nnoremap <silent> <Space>lv <C-w>t<C-w>H<CR>
 
 " }}}
 
@@ -229,6 +229,21 @@
       
   :" }}}
 
+  "* Key mapping -> DHIS2 helpers {{{
+  "* ========================================================
+
+  function! D2StyleApplyToCurrentBuffer()
+    let bufferPath = expand("%")
+    echo "npx" "d2-style" "js" "apply"  bufferPath
+
+    ! "pwd"
+    ! "npx" "d2-style" "js" "apply"  bufferPath
+  endfunction
+  
+  :command! D2style call D2StyleApplyToCurrentBuffer()
+      
+  " }}}
+
 " }}}
 
 " Clipboard {{{
@@ -321,20 +336,6 @@
     autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
     augroup END
   "}}}
-
-" }}}
-
-" Syntax highlighting {{{
-" ========================================================
-" ========================================================
-" ========================================================
-
-  " Matching parentheses
-  hi MatchParen cterm=none ctermbg=white ctermfg=black
-
-  syntax enable
-  " set background=light
-  " colorscheme monokai
 
 " }}}
 
@@ -441,6 +442,7 @@
 
       " Open NERDTree
       nnoremap <C-n> :NERDTreeToggle<CR>
+      nnoremap <Space>ntf :NERDTreeFind<CR>
 
       "open a nerdtree when vim starts
       " autocmd vimenter * call s:CheckToOpenNERDTree()
@@ -509,7 +511,16 @@
 
     Plug 'vim-airline/vim-airline-themes'
     Plug 'ryanoasis/vim-devicons'
-    Plug 'Yggdroot/indentLine'
+    Plug 'rafi/awesome-vim-colorschemes'
+
+    "+ indentLine {{{
+      Plug 'Yggdroot/indentLine'
+
+      "- config {{{
+        let g:indentLine_char_list = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '1', '2', '3', '4', '5']
+      "}}}
+    "}}}
+
   "* }}}
 
   "* All languages {{{
@@ -526,9 +537,18 @@
         let g:UltiSnipsEditSplit="vertical"
       "}}}
     "}}}
+    
+    "+ ale {{{
+      Plug 'w0rp/ale', { 'for': [ 'javascript', 'typescript' ] }
+
+      "- config {{{
+        let g:ale_fixers = {}
+        let g:ale_fixers.javascript = ['eslint']
+        let g:ale_fix_on_save = 1
+      "}}}
+    "}}}
 
     Plug 'honza/vim-snippets'
-    Plug 'jhkersul/vim-jest-snippets'
     Plug 'terryma/vim-expand-region'
     Plug 'tpope/vim-surround'
     Plug 'jiangmiao/auto-pairs'
@@ -555,6 +575,7 @@
 
   "* JavaScript and TypeScript {{{
     Plug 'mxw/vim-jsx', { 'for': [ 'javascript', 'typescript' ] }
+    Plug 'jhkersul/vim-jest-snippets'
   "* }}}
 
   "* JavaScript {{{
@@ -593,6 +614,23 @@
 
   " reload vim config
   nnoremap <leader>+ :so ~/.config/nvim/init.vim<enter>
+
+" }}}
+
+" Syntax highlighting {{{
+" ========================================================
+" ========================================================
+" ========================================================
+
+  " Matching parentheses
+  hi MatchParen cterm=none ctermbg=white ctermfg=black
+
+  syntax enable
+  set background=dark
+  "set background=light
+  "colorscheme monokai
+  "colorscheme solarized8
+  colorscheme gruvbox
 
 " }}}
 

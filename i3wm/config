@@ -358,14 +358,15 @@ for_window [class="^.*"] border pixel 3
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
 bar {
 	i3bar_command i3bar
-	#status_command i3status
-  status_command ty3status --config ~/.config/ty3status/ty3status.yaml
+	status_command i3status
+  #status_command ty3status --config ~/.config/ty3status/ty3status.yaml
   #height 25
 	position top
   # mode hide
 
   ## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
- 	tray_output eDP1
+ 	#tray_output HDMI-0
+ 	tray_output DVI-I-1
 
 	bindsym button4 nop
 	bindsym button5 nop
@@ -390,9 +391,9 @@ bindsym $mod+m bar mode toggle
 
 # Theme colors
 # class                   border  backgr. text    indic.   child_border
-  client.focused          #007F08 #00FF11 #000000 #FFFFFF
-  client.focused_inactive #2F3D44 #000000 #00FF11 #FFFFFF
-  client.unfocused        #2F3D44 #000000 #00FF11 #FFFFFF
+  client.focused          #00FF11 #00FF11 #000000 #FFFFFF
+  client.focused_inactive #FFFFFF #FFFFFF #000000 #FFFFFF
+  client.unfocused        #FFFFFF #000000 #00FF11 #FFFFFF
   client.urgent           #CB4B16 #FDF6E3 #1ABC9C #FFFFFF
   client.placeholder      #FF0000 #0c0c0c #ffffff #FFFFFF 
 
@@ -403,9 +404,9 @@ bindsym $mod+m bar mode toggle
 #############################
 
 # Set inner/outer gaps
-#gaps inner 10
-#gaps outer -4
-#gaps outer 0
+gaps inner 10
+gaps outer -4
+gaps outer 0
 
 # Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
 # gaps inner|outer current|all set|plus|minus <px>
@@ -413,11 +414,11 @@ bindsym $mod+m bar mode toggle
 # gaps outer all plus 5
 
 # Smart gaps (gaps used if only more than one container on the workspace)
-#smart_gaps on
+smart_gaps on
 
 # Smart borders (draw borders around container only if it is not the only container on this workspace) 
 # on|no_gaps (on=always activate and no_gaps=only activate if the gap size to the edge of the screen is 0)
-#smart_borders on
+smart_borders on
 
 # Press $mod+Shift+g to enter the gap mode. Choose o or i for modifying outer/inner gaps. Press one of + / - (in-/decrement for current workspace) or 0 (remove gaps for current workspace). If you also press Shift with these keys, the change will be global for all workspaces.
 set $mode_gaps Gaps: (o) outer, (i) inner
@@ -459,3 +460,63 @@ mode "$mode_gaps_outer" {
 
 # wallpaper
 exec_always feh --bg-scale $HOME/.dotfiles/i3wm/wallpapers/TranscodedWallpaper.jpg
+
+exec always compton
+
+
+
+
+
+##### ### i3-gaps stuff ###
+##### 
+##### # Necessary for i3-gaps to work properly (pixel can be any value)
+##### for_window [class="^.*"] border pixel 3
+##### 
+##### # Smart Gaps
+##### smart_gaps on
+##### 
+##### # Smart Borders
+##### smart_borders on
+##### 
+##### # Set inner/outer gaps
+##### gaps inner 14
+##### gaps outer 0
+##### 
+##### # Gaps mode
+##### set $mode_gaps Gaps: (o) outer, (i) inner
+##### set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+##### set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+##### bindsym $mod+Shift+g mode "$mode_gaps"
+##### 
+##### mode "$mode_gaps" {
+#####         bindsym o      mode "$mode_gaps_outer"
+#####         bindsym i      mode "$mode_gaps_inner"
+#####         bindsym Return mode "default"
+#####         bindsym Escape mode "default"
+##### }
+##### 
+##### mode "$mode_gaps_inner" {
+#####         bindsym plus  gaps inner current plus 5
+#####         bindsym minus gaps inner current minus 5
+#####         bindsym 0     gaps inner current set 0
+##### 
+#####         bindsym Shift+plus  gaps inner all plus 5
+#####         bindsym Shift+minus gaps inner all minus 5
+#####         bindsym Shift+0     gaps inner all set 0
+##### 
+#####         bindsym Return mode "default"
+#####         bindsym Escape mode "default"
+##### }
+##### 
+##### mode "$mode_gaps_outer" {
+#####         bindsym plus  gaps outer current plus 5
+#####         bindsym minus gaps outer current minus 5
+#####         bindsym 0     gaps outer current set 0
+##### 
+#####         bindsym Shift+plus  gaps outer all plus 5
+#####         bindsym Shift+minus gaps outer all minus 5
+#####         bindsym Shift+0     gaps outer all set 0
+##### 
+#####         bindsym Return mode "default"
+#####         bindsym Escape mode "default"
+##### }

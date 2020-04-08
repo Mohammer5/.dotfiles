@@ -1,13 +1,12 @@
 source ~/.bashrc
 
+set -gx PATH /snap/bin $PATH
 fish_vi_key_bindings
-
+set -g theme_color_scheme zenburn
 
 function reverse_history_search
   history | fzf --no-sort --height 30 | read -l command
-  if test $command
-    commandline -rb $command
-  end
+  test $command && commandline -rb $command
 end
 
 function fish_user_key_bindings
@@ -16,4 +15,5 @@ function fish_user_key_bindings
   bind -M insert \cr reverse_history_search
   bind -M insert \cp history-search-backward
   bind -M insert \cn history-search-forward
+  bind -M insert \cl accept-autosuggestion execute
 end

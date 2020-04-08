@@ -39,7 +39,9 @@
     default-jre \
     gparted \
     libgtk2.0-0 \
-    feh
+    feh \
+    compton \
+    snapd
 
 # Install fish
 
@@ -110,3 +112,9 @@ Google for "Firefox hide tabs and add userChrome.css file"
 
 # Install i3-gaps
 
+# Install Figma
+
+  # https://askubuntu.com/questions/968711/firefox-the-address-wasn-t-understood
+  # Add "figma" entry
+
+  sudo snap install figma-linux

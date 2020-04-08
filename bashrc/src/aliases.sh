@@ -60,8 +60,9 @@ alias b-source="source ~/.bashrc"
   alias  d2pt="dhis2 && cd ./prop-types"
   alias   d2r="dhis2 && cd ./reports-app"
   alias  d2uc="dhis2 && cd ./ui-core"
-  alias  d2uw="dhis2 && cd ./ui-widgets"
   alias  d2uf="dhis2 && cd ./ui-forms"
+  alias  d2ui="dhis2 && cd ./ui"
+  alias  d2uw="dhis2 && cd ./ui-widgets"
   alias d2mar="dhis2 && cd ./project-doom"
 
 # Dot files
