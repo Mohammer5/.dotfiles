@@ -365,8 +365,8 @@ bar {
   # mode hide
 
   ## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
- 	#tray_output HDMI-0
- 	tray_output DVI-I-1
+ 	tray_output HDMI-0
+ 	#tray_output DVI-I-1
 
 	bindsym button4 nop
 	bindsym button5 nop

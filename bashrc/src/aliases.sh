@@ -18,6 +18,12 @@ alias b-source="source ~/.bashrc"
 
   alias mkdir="mkdir -p"
 
+  #   set PATH $argv[1]
+
+  #   mkdir $PATH
+  #   cd $PATH
+  # end
+
   # Dir info
   alias ll='ls -Flh --group-directories-first'
 
@@ -40,34 +46,58 @@ alias b-source="source ~/.bashrc"
 ##
 #
 # Dir navigation
+# ==============
+# ==============
+# ==============
 #
 ##
 
-  alias    .='cd ~/.dotfiles'
+  # dir navigation
   alias   ..="cd .."
   alias  ...="cd ../.."
   alias ....="cd ../../.."
 
-  alias     d="cd ~/development/dhis2 && cd (ls -A1 | fzf)"
+  # private development
   alias     x="cd ~/development/private && cd (ls -A1 | fzf)"
+  alias    xb="cd ~/development/private/market-maker"
   alias   dev="cd ~/development/private"
+
+  # Dot files
+  alias   .='cd ~/.dotfiles'
+  alias dot=". && nvim (find . -type f -not -path '*.git/*' | fzf)"
+
+  #
+  # DHIS 2
+  # ------
+  #
+
+  # general
+  alias     d="cd ~/development/dhis2 && cd (ls -A1 | fzf)"
+  alias   d2n="dhis2 && cd ./notes"
   alias dhis2="cd ~/development/dhis2"
 
-  alias    xb="cd ~/development/private/market-maker"
-  alias   d2i="dhis2 && cd ./import-export-app"
-  alias   d2m="dhis2 && cd ./maintenance-app"
-  alias   d2n="dhis2 && cd ./notes"
-  alias  d2pt="dhis2 && cd ./prop-types"
-  alias   d2r="dhis2 && cd ./reports-app"
-  alias  d2uc="dhis2 && cd ./ui-core"
-  alias  d2uf="dhis2 && cd ./ui-forms"
-  alias  d2ui="dhis2 && cd ./ui"
-  alias  d2uw="dhis2 && cd ./ui-widgets"
-  alias d2mar="dhis2 && cd ./project-doom"
+  # apps
+  alias  d2ai="dhis2 && cd ./import-export-app"
+  alias  d2ac="dhis2 && cd ./capture-app"
+  alias  d2am="dhis2 && cd ./maintenance-app"
+  alias  d2ar="dhis2 && cd ./reports-app"
+  alias  d2au="dhis2 && cd ./user-app"
+  alias  d2as="dhis2 && cd ./scheduler-app"
+  alias d2am2="dhis2 && cd ./project-doom"
+  alias d2acc="dhis2 && cd ./cache-cleaner-app"
 
-# Dot files
+  # production libraries
+  alias    d2pt="dhis2 && cd ./prop-types"
+  alias    d2uc="dhis2 && cd ./ui-core"
+  alias    d2uf="dhis2 && cd ./ui-forms"
+  alias    d2ui="dhis2 && cd ./ui"
+  alias    d2uw="dhis2 && cd ./ui-widgets"
+  alias   d2run="dhis2 && cd ./app-runtime"
+  alias d2shell="dhis2 && cd ./app-platform"
 
-  alias dot=". && nvim (find . -type f -not -path '*.git/*' | fzf)"
+  # development libs
+  alias d2cyp="dhis2 && cd ./cli-utils-cypress"
+  alias d2cli="dhis2 && cd ./cli"
 
 # Wallpaper
 alias setwp="feh --bg-scale $HOME/.dotfiles/i3wm/wallpapers/flat-hexagon-wallpaper.jpg"
@@ -127,6 +157,10 @@ end
 
 function debugdev
   dhis2debug $DEBUG_DEV_PATH $DHIS2_HOME_DEBUG_DEV
+end
+
+function debug34
+  dhis2debug $DEBUG_34_PATH $DHIS2_HOME_DEBUG_34
 end
 
 function debug33

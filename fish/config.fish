@@ -1,6 +1,9 @@
 source ~/.bashrc
 
 set -gx PATH /snap/bin $PATH
+set -gx PATH (yarn global bin) $PATH
+set -gx PATH /usr/local/ant/bin $PATH
+
 fish_vi_key_bindings
 set -g theme_color_scheme zenburn
 

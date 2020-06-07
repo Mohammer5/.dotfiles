@@ -1,0 +1,4 @@
+{
+    "baseUrl": "https://debug.dhis2.org/2.34dev",
+    "authorization": "Basic YWRtaW46ZGlzdHJpY3Q="
+}

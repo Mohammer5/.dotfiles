@@ -470,7 +470,7 @@
 
       " Make :Ag search content only and ignore file names
       command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
-      command! -bang -nargs=* Agf call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth ..2'}, <bang>0)
+      command! -bang -nargs=* Agf call fzf#vim#ag(<q-args>, {}, <bang>0)
 
       nnoremap <Space>s :call AgUnderCursor()<Enter>
       nnoremap <Space>S :call AgfUnderCursor()<Enter>
@@ -517,7 +517,7 @@
       Plug 'Yggdroot/indentLine'
 
       "- config {{{
-        let g:indentLine_char_list = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '1', '2', '3', '4', '5']
+        let g:indentLine_char_list = ['2', '3', '4', '5', '6', '7', '8', '9', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
       "}}}
     "}}}
 
@@ -592,10 +592,11 @@
 
   "* Clojure {{{
     Plug 'guns/vim-sexp', { 'for': [ 'clojure' ] }
+    Plug 'jparise/vim-graphql'
   "* }}}
 
-  "* Clojure {{{
-    Plug 'jparise/vim-graphql'
+  "* PHP {{{
+    Plug 'StanAngeloff/php.vim'
   "* }}}
 
   "* @TODO {{{
@@ -626,13 +627,18 @@
   hi MatchParen cterm=none ctermbg=white ctermfg=black
 
   syntax enable
+  set termguicolors
   set background=dark
+
   "set background=light
   "colorscheme monokai
   "colorscheme solarized8
   colorscheme gruvbox
 
-" }}}
+  "let ayucolor="dark"
+  "colorscheme ayu
+
+  " }}}
 
 " Disable unsafe commands in project .vimrc files
 set secure

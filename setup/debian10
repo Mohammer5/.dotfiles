@@ -41,7 +41,16 @@
     libgtk2.0-0 \
     feh \
     compton \
-    snapd
+    snapd \
+    docker docker-compose \
+    ranger \
+    ruby-full
+
+# Manage docker as non-root user
+
+  sudo groupadd docker
+  sudo usermod -aG docker ${USER}
+  su -s ${USER}
 
 # Install fish
 

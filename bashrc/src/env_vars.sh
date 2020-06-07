@@ -19,6 +19,7 @@ set BROWSER_DEFAULT NO
 export DHIS2_DEBUG_BASE_URL=https://debug.dhis2.org
 export DHIS2_PLAY_BASE_URL=https://play.dhis2.org
 export DEBUG_DEV_PATH=dev
+export DEBUG_34_PATH=2.34dev
 export DEBUG_33_PATH=2.33dev
 export DEBUG_32_PATH=2.32dev
 export DEBUG_31_PATH=2.31dev
@@ -34,6 +35,7 @@ export PLAY_29_PATH=2.29
 export DHIS2_HOME=$HOME/.dotfiles/dhis2
 export DHIS2_HOME_FPN=$DHIS2_HOME
 export DHIS2_HOME_DEBUG_DEV=$HOME/.dotfiles/dhis2/debug-dev
+export DHIS2_HOME_DEBUG_34=$HOME/.dotfiles/dhis2/debug-2.34
 export DHIS2_HOME_DEBUG_33=$HOME/.dotfiles/dhis2/debug-2.33
 export DHIS2_HOME_DEBUG_32=$HOME/.dotfiles/dhis2/debug-2.32
 export DHIS2_HOME_DEBUG_31=$HOME/.dotfiles/dhis2/debug-2.31
