@@ -85,6 +85,7 @@ alias b-source="source ~/.bashrc"
   alias  d2as="dhis2 && cd ./scheduler-app"
   alias d2am2="dhis2 && cd ./project-doom"
   alias d2acc="dhis2 && cd ./cache-cleaner-app"
+  alias d2asc="dhis2 && cd ./sms-configuration-app"
 
   # production libraries
   alias    d2pt="dhis2 && cd ./prop-types"
