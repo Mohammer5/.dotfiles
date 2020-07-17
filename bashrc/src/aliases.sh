@@ -105,6 +105,10 @@ alias setwp="feh --bg-scale $HOME/.dotfiles/i3wm/wallpapers/flat-hexagon-wallpap
 
 alias tmux-source="tmux source ~/.tmux.conf"
 
+# Shutdown / Reboot
+alias sn="shutdown now"
+alias rb="reboot"
+
 # Helpers
 alias wrep="grep -Iwrm 1 --color"
 
