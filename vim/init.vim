@@ -402,9 +402,9 @@
     "}}}
 
     "+ YouCompleteMe {{{
-      Plug 'Valloric/YouCompleteMe', { 'do': 'python install.py --all' }
+      " Plug 'Valloric/YouCompleteMe', { 'do': 'python install.py --all' }
 
-      set completeopt-=preview
+      " set completeopt-=preview
     "}}}
 
     Plug 'mattn/emmet-vim', { 'for': [ 'html', 'jsx', 'tsx' ] }
@@ -597,6 +597,10 @@
 
   "* PHP {{{
     Plug 'StanAngeloff/php.vim'
+  "* }}}
+
+  "* Nix {{{
+    Plug 'LnL7/vim-nix'
   "* }}}
 
   "* @TODO {{{
