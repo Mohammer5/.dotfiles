@@ -213,6 +213,9 @@ bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9; workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws0; workspace $ws0
 
+# Monitor setup
+exec_always sleep 5 && ~/.dotfiles/i3wm/scripts/monitor_setup.sh > /tmp/zzz.log 2>&1
+
 # Open applications on specific workspaces
 for_window [class="Spotify"] move to workspace $ws0
 for_window [class="TelegramDesktop"] move to workspace $ws9
@@ -365,7 +368,7 @@ bar {
   # mode hide
 
   ## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
- 	tray_output HDMI-0
+ 	tray_output primary
  	#tray_output DVI-I-1
 
 	bindsym button4 nop
