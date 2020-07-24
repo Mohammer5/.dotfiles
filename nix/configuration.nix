@@ -76,9 +76,16 @@
   #   enableSSHSupport = true;
   #   pinentryFlavor = "gnome3";
   # };
+
   programs.fish.enable = true;
-  programs.bash.shellAliases = {
-    cypress = "CYPRESS_INSTALL_BINARY=0 CYPRESS_RUN_BINARY=/home/gerkules/.dotfiles/nix/built-derivations/cypress-4.7.0/bin/Cypress yarn cy:open";
+  # programs.bash.shellAliases = {
+  #   cyopen = "CYPRESS_INSTALL_BINARY=0 CYPRESS_RUN_BINARY=/home/gerkules/.dotfiles/nix/built-derivations/cypress-4.7.0/bin/Cypress yarn cy:open";
+  #   cyrun = "CYPRESS_INSTALL_BINARY=0 CYPRESS_RUN_BINARY=/home/gerkules/.dotfiles/nix/built-derivations/cypress-4.7.0/bin/Cypress yarn cy:run";
+  # };
+
+  environment.variables = {
+    CYPRESS_INSTALL_BINARY = "0";
+    CYPRESS_RUN_BINARY = "/home/gerkules/.dotfiles/nix/built-derivations/cypress-4.7.0/bin/Cypress";
   };
 
   # List services that you want to enable:
@@ -106,32 +113,32 @@
   hardware.pulseaudio.enable = true;
 
   services.xserver = {
-	enable = true;
+    enable = true;
 
-	displayManager.defaultSession = "xfce+i3";
-	displayManager.lightdm = {
-		enable = true;
-	};
+    displayManager.defaultSession = "xfce+i3";
+    displayManager.lightdm = {
+      enable = true;
+    };
 
-	desktopManager = {
-	        xterm.enable = false;
-		xfce = {
-			enable = true;
-			noDesktop = true;
-			enableXfwm = false;
-		};
-	};
+    desktopManager = {
+      xterm.enable = false;
+      xfce = {
+        enable = true;
+        noDesktop = true;
+        enableXfwm = false;
+      };
+    };
 
-	windowManager.i3 = {
-		enable = true;
-		package = pkgs.i3-gaps;
-		extraPackages = with pkgs; [
-			dmenu
-			i3status
-			i3lock
-			i3blocks
-		];
-	};
+    windowManager.i3 = {
+      enable = true;
+      package = pkgs.i3-gaps;
+      extraPackages = with pkgs; [
+        dmenu
+        i3status
+        # i3lock
+        i3blocks
+      ];
+    };
   };
 
   # Enable the X11 windowing system.
