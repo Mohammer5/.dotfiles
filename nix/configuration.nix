@@ -10,14 +10,20 @@
       ./hardware-configuration.nix
     ];
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.grub = {
-    efiSupport = true;
-    enable = true;
-    version = 2;
-    devices = [ "nodev" ];
-    useOSProber = true;
-  };
+    boot = {
+      # Use the systemd-boot EFI boot loader.
+      loader.grub = {
+        efiSupport = true;
+        enable = true;
+        version = 2;
+        devices = [ "nodev" ];
+        useOSProber = true;
+      };
+
+      # support exfat filesystem
+      extraModulePackages = [ config.boot.kernelPackages.exfat-nofuse ];
+    };
+
   boot.loader.efi.canTouchEfiVariables = true;
   # boot.loader.systemd-boot.enable = true;
 
@@ -29,6 +35,8 @@
   # replicates the default behaviour.
   networking.useDHCP = false;
   networking.interfaces.enp2s0.useDHCP = true;
+
+  virtualisation.docker.enable = true;
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -66,6 +74,11 @@
     firefox
     chromium
     yarn
+    docker-compose
+
+    # External HDD compatibility
+    ntfs3g
+    exfat-utils
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -112,8 +125,14 @@
   sound.enable = true;
   hardware.pulseaudio.enable = true;
 
+  hardware.opengl = {
+    enable = true;
+    driSupport32Bit = true;
+  };
+
   services.xserver = {
     enable = true;
+    videoDrivers = [ "nvidia" ];
 
     displayManager.defaultSession = "xfce+i3";
     displayManager.lightdm = {
@@ -153,10 +172,31 @@
   # services.xserver.displayManager.sddm.enable = true;
   # services.xserver.desktopManager.plasma5.enable = true;
 
+  location = {
+    latitude = 49.0;
+    longitude = 8.0;
+  };
+
+  services = {
+    redshift = {
+      enable = true;
+    };
+
+    geoclue2 = {
+      enable = true;
+    };
+
+    localtime = {
+      enable = true;
+    };
+  };
+
+  users.groups.docker = {};
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.gerkules = {
     isNormalUser = true;
-    extraGroups = [ "sudo" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "sudo" "docker" ]; # Enable ‘sudo’ for the user.
     shell = pkgs.fish;
   };
 

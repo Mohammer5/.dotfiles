@@ -35,13 +35,14 @@
   nnoremap <silent> <Space>t :Ag<enter>
   nnoremap <silent> <Space>T :Agf<enter>
   nnoremap <silent> <Space>f :Files<enter>
+  nnoremap <silent> <Space>s :BLines<enter>
 
   " Make :Ag search content only and ignore file names
   command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
   command! -bang -nargs=* Agf call fzf#vim#ag(<q-args>, {}, <bang>0)
 
-  nnoremap <Space>s :call AgUnderCursor()<Enter>
-  nnoremap <Space>S :call AgfUnderCursor()<Enter>
+  " nnoremap <Space>s :call AgUnderCursor()<Enter>
+  " nnoremap <Space>S :call AgfUnderCursor()<Enter>
 
   fu! AgUnderCursor()
     let wordUnderCursor = expand("<cword>")

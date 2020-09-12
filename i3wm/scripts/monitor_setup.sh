@@ -1,9 +1,19 @@
 #! /bin/sh
+
 MACHINE=$(hostname)
 
 if [ $MACHINE == 'nixos' ]; then
-  xrandr \
-    --output "HDMI-1" --auto --primary \
-    --output "DVI-D-1" --auto --right-of "HDMI-1" \
-    --output "DVI-I-1" --auto --left-of "HDMI-1"
+  CENTER="HDMI-0"
+  RIGHT="DVI-I-1"
+  LEFT="DVI-D-0"
+
+  xrandr --output $CENTER --auto --primary --brightness 0.6
+  xrandr --output $RIGHT --auto --left-of $CENTER --brightness 0.6
+  xrandr --output $LEFT --auto --right-of $CENTER --brightness 0.6
+else
+  # absolute path of this file
+  LOCATION="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+
+  echo "Monitor setup does not exist for host with name '$MACHINE'"
+  echo "Please edit '$LOCATION/monitor_setup.sh'"
 fi

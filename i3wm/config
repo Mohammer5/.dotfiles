@@ -213,9 +213,6 @@ bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9; workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws0; workspace $ws0
 
-# Monitor setup
-exec_always sleep 5 && ~/.dotfiles/i3wm/scripts/monitor_setup.sh > /tmp/zzz.log 2>&1
-
 # Open applications on specific workspaces
 for_window [class="Spotify"] move to workspace $ws0
 for_window [class="TelegramDesktop"] move to workspace $ws9
@@ -461,14 +458,13 @@ mode "$mode_gaps_outer" {
         bindsym Escape mode "default"
 }
 
+# Monitor setup
+exec_always sleep 1 && ~/.dotfiles/i3wm/scripts/monitor_setup.sh > /tmp/zzz.log 2>&1
+
 # wallpaper
-exec_always feh --bg-scale $HOME/.dotfiles/i3wm/wallpapers/TranscodedWallpaper.jpg
+exec_always sleep 2 && feh --bg-scale $HOME/.dotfiles/i3wm/wallpapers/TranscodedWallpaper.jpg
 
-exec always compton
-
-
-
-
+exec_always compton
 
 ##### ### i3-gaps stuff ###
 ##### 
