@@ -14,6 +14,7 @@
   amno = commit --amend --no-edit
   ap = add -p
   bD = "!f() { git branch -D $(git branch | fzf); }; f"
+  bDm = "!f() { git branch -D $(git branch | fzf -m); }; f"
   c = commit
   cm = commit -m
   cl = clone

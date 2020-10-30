@@ -34,7 +34,15 @@ in {
 
       # node development
       nodejs-13_x
-      yarn
+      # https://github.com/NixOS/nixpkgs/issues/53820
+      (yarn.override { nodejs = nodejs-13_x; })
+
+      transmission
+      vlc
+      zip
+      #texlive
+      steam-run
+      #brave
     ];
 
     # This value determines the Home Manager release that your

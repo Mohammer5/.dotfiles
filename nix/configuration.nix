@@ -79,6 +79,9 @@
     # External HDD compatibility
     ntfs3g
     exfat-utils
+    p7zip
+
+    openvpn
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -158,6 +161,27 @@
         i3blocks
       ];
     };
+
+    # config = 
+    #   ''
+    #     # Configure the Kensington trackball
+    #     # http://yjpark.blogspot.fr/2010/04/using-trackball-on-linux.html
+    #     Section "InputClass"
+    #       Identifier "Trackball Wheel Emulation"
+    #       MatchProduct "Kensington Kensington Slimblade Trackball"
+    #       MatchDevicePath "/dev/input/event*"
+    #       # Enable the mouse wheel emulation (similar to the navigation mode)
+    #       Option "EmulateWheel" "true"
+    #       # Upper-right button to trigger the navigation mode
+    #       Option "EmulateWheelButton" "8"
+    #       # Make it work for both vertical and horizontal scroll
+    #       Option "XAxisMapping" "6 7"
+    #       Option "YAxisMapping" "4 5"
+    #       # Remap the buttons a little bit, since firefox will use
+    #       # button 8 as back button and that's not what I want
+    #       Option "ButtonMapping" "1 8 3 4 5 6 7 10 9 2 11 12"
+    #     EndSection
+    #   '';
   };
 
   # Enable the X11 windowing system.
