@@ -101,7 +101,7 @@ in {
       vim-prettier
       vim-windowswap
       nerdtree-clip
-      nerdtree-git-plugin
+      #nerdtree-git-plugin
       scss-syntax
       #vim-jsx
       vim-jest-snippets
