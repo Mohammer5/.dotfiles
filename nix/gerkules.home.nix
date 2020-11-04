@@ -9,6 +9,8 @@ in {
   programs.home-manager.enable = true;
   nixpkgs.config.allowUnfree = true;
 
+  manual.manpages.enable = false;
+
   home = {
     username = "gerkules";
     homeDirectory = "/home/gerkules";
@@ -33,9 +35,9 @@ in {
       spotify
 
       # node development
-      nodejs-13_x
+      nodejs-14_x
       # https://github.com/NixOS/nixpkgs/issues/53820
-      (yarn.override { nodejs = nodejs-13_x; })
+      (yarn.override { nodejs = nodejs-14_x; })
 
       transmission
       vlc
