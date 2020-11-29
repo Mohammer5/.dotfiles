@@ -314,13 +314,18 @@ exec --no-startup-id clipit
 # exec_always --no-startup-id sbxkb
 # exec --no-startup-id start_conky_maia
 # exec --no-startup-id start_conky_green
+
 exec --no-startup-id xautolock -time 60 -locker blurlock
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
-exec telegram-desktop
-exec spotify
-exec slack
 exec xset -b
+
+bindsym $mod+Shift+n exec --no-startup-id "i3-msg 'workspace 8Slack' && slack"
+bindsym $mod+Shift+t exec --no-startup-id "i3-msg 'workspace 9Chats' && telegram-desktop"
+bindsym $mod+Shift+m exec --no-startup-id "i3-msg 'workspace Spotify' && spotify"
+# exec telegram-desktop
+# exec spotify
+# exec slack
 
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:

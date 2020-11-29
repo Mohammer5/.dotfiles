@@ -32,12 +32,15 @@ in {
       zoom-us
 
       # music
+      # (spotify.override { version = "1.1.46.916.g416cacf1"; })
       spotify
 
       # node development
       nodejs-14_x
       # https://github.com/NixOS/nixpkgs/issues/53820
       (yarn.override { nodejs = nodejs-14_x; })
+      # For remotedev-server for node redux scripts
+      # gcc-wrapper
 
       transmission
       vlc
@@ -45,6 +48,32 @@ in {
       #texlive
       steam-run
       #brave
+      #wally-cli
+
+      # appimage-run
+      # avahi
+      # binutils
+      # brave
+      # clojure
+      # cypress
+      # dpkg
+      # exfat
+      # gcc-wrapper
+      # gconf
+      # geoclue
+      # gparted
+      # # gtk+
+      # heroku
+      # home-manager-path
+      # leiningen
+      # libnotify
+      # nmap
+      # nss
+      # octave
+      # patchelf
+      # playonlinux
+      # system-config-printer
+      # woeusb
     ];
 
     # This value determines the Home Manager release that your

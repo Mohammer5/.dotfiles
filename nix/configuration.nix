@@ -36,6 +36,8 @@
   networking.useDHCP = false;
   networking.interfaces.enp2s0.useDHCP = true;
 
+  hardware.sane.enable = true;
+
   virtualisation.docker.enable = true;
 
   # Configure network proxy if necessary
@@ -82,6 +84,9 @@
     p7zip
 
     openvpn
+    ledger-live-desktop
+
+    simple-scan
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -215,13 +220,18 @@
     };
   };
 
-  users.groups.docker = {};
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.gerkules = {
-    isNormalUser = true;
-    extraGroups = [ "sudo" "docker" ]; # Enable ‘sudo’ for the user.
-    shell = pkgs.fish;
+  users = {
+    groups = {
+      plugdev = {};
+      docker = {};
+    };
+
+    users.gerkules = {
+      isNormalUser = true;
+      extraGroups = [ "sudo" "docker" "plugdev" "scanner" "lp" ];
+      shell = pkgs.fish;
+    };
   };
 
   # This value determines the NixOS release from which the default
@@ -250,5 +260,26 @@
   '';
 
   nix.allowedUsers = ["gerkules"];
+
+  # Required for Ledger Live to detect Ledger Nano S via USB
+  services.udev.extraRules = ''
+    # firmware 1.6.0+
+    SUBSYSTEMS=="usb", ATTRS{idVendor}=="2581", ATTRS{idProduct}=="1b7c", MODE="0660", TAG+="uaccess", TAG+="udev-acl"
+    SUBSYSTEMS=="usb", ATTRS{idVendor}=="2581", ATTRS{idProduct}=="2b7c", MODE="0660", TAG+="uaccess", TAG+="udev-acl"
+    SUBSYSTEMS=="usb", ATTRS{idVendor}=="2581", ATTRS{idProduct}=="3b7c", MODE="0660", TAG+="uaccess", TAG+="udev-acl"
+    SUBSYSTEMS=="usb", ATTRS{idVendor}=="2581", ATTRS{idProduct}=="4b7c", MODE="0660", TAG+="uaccess", TAG+="udev-acl"
+    SUBSYSTEMS=="usb", ATTRS{idVendor}=="2581", ATTRS{idProduct}=="1807", MODE="0660", TAG+="uaccess", TAG+="udev-acl"
+    SUBSYSTEMS=="usb", ATTRS{idVendor}=="2581", ATTRS{idProduct}=="1808", MODE="0660", TAG+="uaccess", TAG+="udev-acl"
+    SUBSYSTEMS=="usb", ATTRS{idVendor}=="2c97", ATTRS{idProduct}=="0000", MODE="0660", TAG+="uaccess", TAG+="udev-acl"
+    SUBSYSTEMS=="usb", ATTRS{idVendor}=="2c97", ATTRS{idProduct}=="0001", MODE="0660", TAG+="uaccess", TAG+="udev-acl"
+    SUBSYSTEMS=="usb", ATTRS{idVendor}=="2c97", ATTRS{idProduct}=="0004", MODE="0660", TAG+="uaccess", TAG+="udev-acl"
+    SUBSYSTEMS=="usb", ATTRS{idVendor}=="2c97", ATTRS{idProduct}=="1011", MODE="0660", GROUP="plugdev"
+    SUBSYSTEMS=="usb", ATTRS{idVendor}=="2c97", ATTRS{idProduct}=="1015", MODE="0660", GROUP="plugdev"
+
+    # Rule for all ZSA keyboards
+    SUBSYSTEM=="usb", ATTR{idVendor}=="3297", GROUP="plugdev"
+    # Rule for the Moonlander
+    SUBSYSTEM=="usb", ATTR{idVendor}=="3297", ATTR{idProduct}=="1969", GROUP="plugdev"
+  '';
 }
 

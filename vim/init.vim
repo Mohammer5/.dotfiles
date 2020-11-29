@@ -251,7 +251,7 @@
 " ========================================================
 " ========================================================
 
-  set clipboard=unnamed
+  set clipboard=unnamedplus
 
   " paste to clipboard
   vnoremap <leader>y "+y

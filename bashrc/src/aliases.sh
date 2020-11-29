@@ -99,6 +99,7 @@ alias b-source="source ~/.bashrc"
   # development libs
   alias d2cyp="dhis2 && cd ./cli-utils-cypress"
   alias d2cli="dhis2 && cd ./cli"
+  alias d2mod="dhis2 && cd ./cli-utils-codemods"
 
 # Wallpaper
 alias setwp="feh --bg-scale $HOME/.dotfiles/i3wm/wallpapers/flat-hexagon-wallpaper.jpg"
