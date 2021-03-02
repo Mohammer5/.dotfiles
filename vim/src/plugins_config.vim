@@ -5,28 +5,91 @@
 " YCM
   set completeopt-=preview
 
-" NerdTree
+" " NerdTree
   let NERDTreeShowHidden=1
   let NERDTreeMinimalUI = 1
   let NERDTreeDirArrows = 1
   let NERDTreeAutoDeleteBuffer = 1
   let g:NERDTreeNodeDelimiter = "\u00a0"
-
+ 
   " Open NERDTree
   nnoremap <C-n> :NERDTreeToggle<CR>
   nnoremap <Space>ntf :NERDTreeFind<CR>
-
+ 
   "open a nerdtree when vim starts
   " autocmd vimenter * call s:CheckToOpenNERDTree()
-
+ 
   function! s:CheckToOpenNERDTree() abort
     "don't open nerdtree for gitcommits
     if &ft == 'gitcommit' || &ft == 'gitrebase'
       return
     endif
-
+ 
     NERDTree
   endfunction
+
+" ChadTree
+  " nnoremap <C-n> <cmd>CHADopen<cr>
+  " " let g:chadtree_settings = {'keymap': { 'primary': ["o"]                                                              }}
+  " let g:chadtree_settings = {
+  "   \'keymap': {
+  "     \'quit': ["q"],
+  "     \'toggle_version_control': [",g"],
+  "     \'toggle_follow': [],
+  "     \'toggle_hidden': ["."],
+  "     \'refocus': ["~"],
+  "     \'refresh': ["<c-r>"],
+  "     \'change_focus': ["c"],
+  "     \'change_focus_up': ["C"],
+  "     \'open_sys': ["<enter>"],
+  "     \'collapse': ["x"],
+  "     \'copy': ["mc"],
+  "     \'cut': ["mx"],
+  "     \'delete': ["md"],
+  "     \'new': ["ma"],
+  "     \'rename': ["mr"],
+  "     \'select': ["<space>"],
+  "     \'clear_selection': ["<esc>"],
+  "     \'primary': ["o"],
+  "     \'h_split': ["i"],
+  "     \'v_split': ["s"],
+  "     \'secondary': ["g"],
+  "     \'tertiary': [],
+  "     \'clear_filter': ["F", "E"],
+  "     \'filter': ["f"],
+  "     \'search': ["e"],
+  "     \'stat': ["K"],
+  "     \'copy_name': ["y"],
+  "     \'jump_to_current': ["J"],
+  "     \'trash': ["t"],
+  "     \'bigger': ["+", "="],
+  "     \'smaller': ["-", "_"],
+  "   \}
+  " \}
+  " " nnoremap o <cmd>CHADprimary<cr>
+  " augroup ChadTreeLineNumbers
+  "   autocmd!
+  "   autocmd FileType CHADTree setlocal number
+  "   autocmd BufEnter,FocusGained,InsertLeave,WinEnter,FileType CHADTree setlocal relativenumber
+  " augroup END
+
+  " function! CHADTest()
+  "   let bufferz = getbufinfo({'bufloaded': 1})
+  "   let result = []
+
+  "   for l:item in bufferz
+  "     "if empty(l:item.name)
+  "     "  continue
+  "     "endif
+  "     call add(result, l:item)
+  "   endfor
+
+  "   echo result
+  " endfunction
+  " :command! Test call CHADTest()
+
+  "nnoremap <leader>b messages
+  "nnoremap <leader>b call CHADTest()<CR>
 
 " fzf
   let g:fzf_buffers_jump = 1

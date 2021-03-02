@@ -4,8 +4,8 @@
 " ========================================================
 
   augroup resize_handling
-  autocmd!
-  autocmd VimResized * wincmd =
+    autocmd!
+    autocmd VimResized * wincmd =
   augroup END
 
   " Window resizing

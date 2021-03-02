@@ -214,7 +214,10 @@ bindsym $mod+Shift+9 move container to workspace $ws9; workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws0; workspace $ws0
 
 # Monitor setup
-exec_always sleep 5 && ~/.dotfiles/i3wm/scripts/monitor_setup.sh > /tmp/zzz.log 2>&1
+exec_always sleep 1 && ~/.dotfiles/i3wm/scripts/monitor_setup.sh > /tmp/zzz.log 2>&1
+
+# wallpaper
+exec_always sleep 1 && feh --bg-scale $HOME/.dotfiles/i3wm/wallpapers/TranscodedWallpaper.jpg
 
 # Open applications on specific workspaces
 for_window [class="Spotify"] move to workspace $ws0
@@ -461,8 +464,6 @@ mode "$mode_gaps_outer" {
         bindsym Escape mode "default"
 }
 
-# wallpaper
-exec_always feh --bg-scale $HOME/.dotfiles/i3wm/wallpapers/TranscodedWallpaper.jpg
 
 exec always compton
 

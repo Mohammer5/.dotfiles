@@ -1,18 +1,20 @@
 call plug#begin('~/.vim/plugged')
 
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'mortonfox/nerdtree-clip'
+Plug 'scrooloose/nerdtree'
+
+" Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': ':UpdateRemotePlugins'}
 Plug 'Shougo/vimproc.vim', { 'do': 'make' } " REQUIRED!
 Plug 'Shougo/deoplete.nvim' " Autocomplete + suggestions
 Plug 'Valloric/YouCompleteMe', { 'do': 'python install.py --all' }
 Plug 'mattn/emmet-vim', { 'for': [ 'html', 'jsx', 'tsx' ] }
-Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tpope/vim-fugitive' " Git Wrapper
 Plug 'mbbill/undotree'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'wincent/ferret' " Search & replace
-Plug 'mortonfox/nerdtree-clip'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'wesQ3/vim-windowswap'
-Plug 'scrooloose/nerdtree'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 " Plug 'vim-airline/vim-airline'
