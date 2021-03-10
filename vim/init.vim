@@ -251,7 +251,7 @@
 " ========================================================
 " ========================================================
 
-  set clipboard=unnamedplus
+  set clipboard=unnamed
 
   " paste to clipboard
   vnoremap <leader>y "+y
@@ -580,7 +580,7 @@
 
   "* JavaScript {{{
     Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-    Plug 'ternjs/tern_for_vim', { 'do': 'cd ~/.vim/plugged/tern_for_vim/ && npm install', 'for': 'javascript' }
+    " Plug 'ternjs/tern_for_vim', { 'do': 'cd ~/.vim/plugged/tern_for_vim/ && npm install', 'for': 'javascript' }
     Plug 'alampros/vim-styled-jsx'
     Plug 'Galooshi/vim-import-js', { 'for': 'javascript' }
   "* }}}

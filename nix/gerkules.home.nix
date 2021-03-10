@@ -16,8 +16,9 @@ in {
     homeDirectory = "/home/gerkules";
 
     packages = with pkgs; [
+      peek
       cryptsetup
-      tor-browser-bundle-bin
+      # tor-browser-bundle-bin
 
       # system stuff
       rofi
@@ -41,6 +42,7 @@ in {
       (yarn.override { nodejs = nodejs-14_x; })
       # For remotedev-server for node redux scripts
       # gcc-wrapper
+      cypress
 
       transmission
       vlc
@@ -52,7 +54,7 @@ in {
 
       # appimage-run
       # avahi
-      # binutils
+      binutils
       # brave
       # clojure
       # cypress
@@ -92,53 +94,53 @@ in {
     viAlias = true;
     vimAlias = true;
 
-    extraConfig = vimrc;
+    # extraConfig = vimrc;
 
-    plugins = with pkgs.vimPlugins // plugins; [
-      vimproc
-      deoplete-nvim
-      YouCompleteMe
-      emmet-vim
-      undotree
-      nerdtree
-      vim-fugitive
-      vim-indent-guides
-      ferret
-      fzf-vim
-      vim-airline-themes
-      vim-devicons
-      awesome-vim-colorschemes
-      indentLine
-      ultisnips
-      ale
-      vim-snippets
-      vim-expand-region
-      vim-surround
-      auto-pairs
-      nerdcommenter
-      editorconfig-vim
-      vim-css-color
-      vim-jsx-pretty
-      coc-snippets
-      # tern_for_vim
-      vim-sexp
-      vim-nix
-      vim-tmux-navigator
-      typescript-vim
-      tsuquyomi
+    # plugins = with pkgs.vimPlugins // plugins; [
+    #   vimproc
+    #   deoplete-nvim
+    #   YouCompleteMe
+    #   emmet-vim
+    #   undotree
+    #   nerdtree
+    #   vim-fugitive
+    #   vim-indent-guides
+    #   ferret
+    #   fzf-vim
+    #   vim-airline-themes
+    #   vim-devicons
+    #   awesome-vim-colorschemes
+    #   indentLine
+    #   ultisnips
+    #   ale
+    #   vim-snippets
+    #   vim-expand-region
+    #   vim-surround
+    #   auto-pairs
+    #   nerdcommenter
+    #   editorconfig-vim
+    #   vim-css-color
+    #   vim-jsx-pretty
+    #   coc-snippets
+    #   # tern_for_vim
+    #   vim-sexp
+    #   vim-nix
+    #   vim-tmux-navigator
+    #   typescript-vim
+    #   tsuquyomi
 
-      vim-prettier
-      vim-windowswap
-      nerdtree-clip
-      #nerdtree-git-plugin
-      scss-syntax
-      #vim-jsx
-      vim-jest-snippets
-      vim-javascript
-      vim-styled-jsx
-      vim-import-js
-      vim-graphql
-      php-vim
-    ];
+    #   vim-prettier
+    #   vim-windowswap
+    #   nerdtree-clip
+    #   #nerdtree-git-plugin
+    #   scss-syntax
+    #   #vim-jsx
+    #   vim-jest-snippets
+    #   vim-javascript
+    #   vim-styled-jsx
+    #   vim-import-js
+    #   vim-graphql
+    #   php-vim
+    # ];
   };
 }

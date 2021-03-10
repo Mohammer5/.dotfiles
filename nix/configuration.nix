@@ -129,6 +129,16 @@
     brgenml1cupswrapper
   ];
 
+  # systemd.services {
+  #   vpngermany = {
+  #     description = "ExpressVPN Germany";
+  #     wantedBy = [ "multi-user.target" ];
+  #     serviceConfig = {
+  #       ExecStart = "${pkgs.openvpn}/bin/openvpn ./opvn-files/my_expressvpn_germany_-_frankfurt_-_1_udp.ovpn";
+  #     };
+  #   };
+  # }
+
   # Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = true;

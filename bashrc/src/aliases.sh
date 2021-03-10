@@ -57,14 +57,21 @@ alias b-source="source ~/.bashrc"
   alias  ...="cd ../.."
   alias ....="cd ../../.."
 
-  # private development
-  alias     x="cd ~/development/private && cd (ls -A1 | fzf)"
-  alias    xb="cd ~/development/private/market-maker"
-  alias   dev="cd ~/development/private"
-
   # Dot files
   alias   .='cd ~/.dotfiles'
   alias dot=". && nvim (find . -type f -not -path '*.git/*' | fzf)"
+
+  # private development
+  alias     x="cd /shared/development/private && cd (ls -A1 | fzf)"
+  alias   dev="cd /shared/development/private"
+
+  #
+  # BF2C
+  # ------
+  #
+
+  alias bf2c="cd /shared/development/bf2c"
+  alias  rmp="bf2c && cd ./reactive-money-printer"
 
   #
   # DHIS 2
@@ -72,9 +79,9 @@ alias b-source="source ~/.bashrc"
   #
 
   # general
-  alias     d="cd ~/development/dhis2 && cd (ls -A1 | fzf)"
+  alias     d="cd /shared/development/dhis2 && cd (ls -A1 | fzf)"
   alias   d2n="dhis2 && cd ./notes"
-  alias dhis2="cd ~/development/dhis2"
+  alias dhis2="cd /shared/development/dhis2"
 
   # apps
   alias  d2ai="dhis2 && cd ./import-export-app"
@@ -97,8 +104,8 @@ alias b-source="source ~/.bashrc"
   alias d2shell="dhis2 && cd ./app-platform"
 
   # development libs
-  alias d2cyp="dhis2 && cd ./cli-utils-cypress"
   alias d2cli="dhis2 && cd ./cli"
+  alias d2cyp="dhis2 && cd ./cli-utils-cypress"
   alias d2mod="dhis2 && cd ./cli-utils-codemods"
 
 # Wallpaper
