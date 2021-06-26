@@ -14,6 +14,8 @@
   # boot.loader.systemd-boot.enable = true;
   # boot.loader.efi.canTouchEfiVariables = true;
   boot = {
+    kernel.sysctl."net.ipv6.conf.eth0.disable_ipv6" = true;
+
     # Use the systemd-boot EFI boot loader.
     loader.grub = {
       efiSupport = true;
@@ -39,6 +41,38 @@
       device = "/dev/disk/by-uuid/95fabef7-c85a-408e-9fa7-9745d3d3c16b";
     };
   };
+ 
+  # nixpkgs.overlays = [(self: super: {
+  #   # ### EXAMPLE {{{
+  #   # google-chrome = super.google-chrome.override {
+  #   #   commandLineArgs =
+  #   #     "--proxy-server='https=127.0.0.1:3128;http=127.0.0.1:3128'";
+  #   # };
+  #   # ### }}}
+
+  #   neo4j = super.neo4j.overrideAttrs (old: rec {
+  #     version = "4.2.3";
+
+  #     src = pkgs.fetchurl {
+  #       url = "https://neo4j.com/artifact.php?name=neo4j-community-${version}-unix.tar.gz";
+  #       sha256 = "1kk54xhhdakix20sjip5zh8bs35v5kgr2x5jac74n2gddqfxr7ii";
+  #     };
+
+  #     installPhase = ''
+  #       mkdir -p "$out/share/neo4j"
+  #       cp -R * "$out/share/neo4j"
+  #       mkdir -p "$out/bin"
+  #       ls -als $out/share/neo4j/bin
+  #       for NEO4J_SCRIPT in neo4j neo4j-admin neo4j-import cypher-shell
+  #       do
+  #         makeWrapper "$out/share/neo4j/bin/$NEO4J_SCRIPT" \
+  #             "$out/bin/$NEO4J_SCRIPT" \
+  #             --prefix PATH : "${pkgs.lib.makeBinPath [ pkgs.jre8 pkgs.which pkgs.gawk ]}" \
+  #             --set JAVA_HOME "$jre8"
+  #       done
+  #     '';
+  #   });
+  # })];
 
   # networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -111,7 +145,10 @@
 
   virtualisation.docker.enable = true;
 
+  nixpkgs.config.allowUnfree = true;
+
   environment.systemPackages = with pkgs; [
+    neo4j
     tree
     htop
     gnumake
@@ -138,10 +175,13 @@
     p7zip
 
     openvpn
+    update-resolv-conf
     ledger-live-desktop
 
     simple-scan
   ];
+
+  environment.etc.openvpn.source = "${pkgs.update-resolv-conf}/libexec/openvpn";
 
   location = {
     latitude = 49.0;
@@ -160,6 +200,13 @@
     localtime = {
       enable = true;
     };
+
+    # openvpn.servers = {
+    #   frankfurt1 = { config = '' /home/gerkules/.dotfiles/nix/opvn-files/my_expressvpn_germany_-_frankfurt_-_1_udp.ovpn ''; };
+    #   philippines = { config = '' /home/gerkules/.dotfiles/nix/opvn-files/my_expressvpn_philippines_udp.ovpn ''; };
+    #   usa-nj3 = { config = '' /home/gerkules/.dotfiles/nix/opvn-files/my_expressvpn_usa_-_new_jersey_-_3_udp.ovpn ''; };
+    #   vietnm = { config = '' /home/gerkules/.dotfiles/nix/opvn-files/my_expressvpn_vietnam_udp.ovpn ''; };
+    # };
   };
 
   programs.fish.enable = true;
@@ -201,12 +248,44 @@
     Defaults:root,%wheel env_keep+=TERMINFO
   '';
 
+  hardware.ledger.enable = true;
+
+  # Required for Ledger Live to detect Ledger Nano S via USB
+  # services.udev.extraRules = ''
+  #   # firmware 1.6.0+
+  #   SUBSYSTEMS=="usb", ATTRS{idVendor}=="2581", ATTRS{idProduct}=="1b7c", MODE="0660", TAG+="uaccess", TAG+="udev-acl"
+  #   SUBSYSTEMS=="usb", ATTRS{idVendor}=="2581", ATTRS{idProduct}=="2b7c", MODE="0660", TAG+="uaccess", TAG+="udev-acl"
+  #   SUBSYSTEMS=="usb", ATTRS{idVendor}=="2581", ATTRS{idProduct}=="3b7c", MODE="0660", TAG+="uaccess", TAG+="udev-acl"
+  #   SUBSYSTEMS=="usb", ATTRS{idVendor}=="2581", ATTRS{idProduct}=="4b7c", MODE="0660", TAG+="uaccess", TAG+="udev-acl"
+  #   SUBSYSTEMS=="usb", ATTRS{idVendor}=="2581", ATTRS{idProduct}=="1807", MODE="0660", TAG+="uaccess", TAG+="udev-acl"
+  #   SUBSYSTEMS=="usb", ATTRS{idVendor}=="2581", ATTRS{idProduct}=="1808", MODE="0660", TAG+="uaccess", TAG+="udev-acl"
+  #   SUBSYSTEMS=="usb", ATTRS{idVendor}=="2c97", ATTRS{idProduct}=="0000", MODE="0660", TAG+="uaccess", TAG+="udev-acl"
+  #   SUBSYSTEMS=="usb", ATTRS{idVendor}=="2c97", ATTRS{idProduct}=="0001", MODE="0660", TAG+="uaccess", TAG+="udev-acl"
+  #   SUBSYSTEMS=="usb", ATTRS{idVendor}=="2c97", ATTRS{idProduct}=="0004", MODE="0660", TAG+="uaccess", TAG+="udev-acl"
+  #   SUBSYSTEMS=="usb", ATTRS{idVendor}=="2c97", ATTRS{idProduct}=="1011", MODE="0660", GROUP="plugdev"
+  #   SUBSYSTEMS=="usb", ATTRS{idVendor}=="2c97", ATTRS{idProduct}=="1015", MODE="0660", GROUP="plugdev"
+
+  #   # Rule for all ZSA keyboards
+  #   SUBSYSTEM=="usb", ATTR{idVendor}=="3297", GROUP="plugdev"
+  #   # Rule for the Moonlander
+  #   SUBSYSTEM=="usb", ATTR{idVendor}=="3297", ATTR{idProduct}=="1969", GROUP="plugdev"
+  # '';
+
   # Configure keymap in X11
   # services.xserver.layout = "us";
   # services.xserver.xkbOptions = "eurosign:e";
 
   # Enable CUPS to print documents.
-  # services.printing.enable = true;
+  services.printing.enable = true;
+  services.printing.drivers = [
+    pkgs.gutenprint
+    pkgs.gutenprintBin
+    pkgs.brlaser
+    pkgs.brgenml1lpr
+    pkgs.brgenml1cupswrapper
+  ];
+  services.avahi.enable = true;
+  services.avahi.nssmdns = true;
 
   # Enable sound.
   sound.enable = true;

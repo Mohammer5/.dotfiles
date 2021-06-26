@@ -167,4 +167,7 @@
       
   " }}}
 
+  " nnoremap <leader>jf :%!python -m json.tool<Enter>
+  nnoremap =j :set ft=json<CR>:%!python -m json.tool<CR>
+
 " }}}

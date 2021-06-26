@@ -4,15 +4,15 @@ let
   buildVimPlugin = pkgs.vimUtils.buildVimPluginFrom2Nix;
   github = "https://github.com";
 in {
-  "vim-prettier" = buildVimPlugin {
-    name = "vim-prettier";
-    src = fetchgit {
-      url = "${github}/prettier/vim-prettier";
-      #rev = "master";
-      sha256 = "197fy3g3fvqysaf5h4h865a432nbjy91k1g8b303c3y5whgwh1ff";
-    };
-    dependencies = [];
-  };
+  # "vim-prettier" = buildVimPlugin {
+  #   name = "vim-prettier";
+  #   src = fetchgit {
+  #     url = "${github}/prettier/vim-prettier";
+  #     #rev = "master";
+  #     sha256 = "197fy3g3fvqysaf5h4h865a432nbjy91k1g8b303c3y5whgwh1ff";
+  #   };
+  #   dependencies = [];
+  # };
 
   "vim-windowswap" = buildVimPlugin {
     name = "vim-windowswap";
@@ -32,14 +32,14 @@ in {
     dependencies = [];
   };
 
-  "nerdtree-git-plugin" = buildVimPlugin {
-    name = "nerdtree-git-plugin";
-    src = fetchgit {
-      url = "${github}/Xuyuanp/nerdtree-git-plugin";
-      sha256 = "108ziy0w8mhfhqw9z5s023fvx4bj0a1ip2phbg7320dg344z3hz3";
-    };
-    dependencies = [];
-  };
+  # "nerdtree-git-plugin" = buildVimPlugin {
+  #   name = "nerdtree-git-plugin";
+  #   src = fetchgit {
+  #     url = "${github}/Xuyuanp/nerdtree-git-plugin";
+  #     sha256 = "108ziy0w8mhfhqw9z5s023fvx4bj0a1ip2phbg7320dg344z3hz3";
+  #   };
+  #   dependencies = [];
+  # };
 
   "scss-syntax" = buildVimPlugin {
     name = "scss-syntax";
@@ -68,14 +68,14 @@ in {
     dependencies = [];
   };
 
-  "vim-javascript" = buildVimPlugin {
-    name = "vim-javascript";
-    src = fetchgit {
-      url = "${github}/pangloss/vim-javascript";
-      sha256 = "16s3s883azfmwkr6hhnh8m7ibk6jm3vnvpmsagangxn0mz6ky533";
-    };
-    dependencies = [];
-  };
+  # "vim-javascript" = buildVimPlugin {
+  #   name = "vim-javascript";
+  #   src = fetchgit {
+  #     url = "${github}/pangloss/vim-javascript";
+  #     sha256 = "16s3s883azfmwkr6hhnh8m7ibk6jm3vnvpmsagangxn0mz6ky533";
+  #   };
+  #   dependencies = [];
+  # };
 
   "vim-styled-jsx" = buildVimPlugin {
     name = "vim-styled-jsx";
@@ -90,19 +90,19 @@ in {
     name = "vim-import-js";
     src = fetchgit {
       url = "${github}/Galooshi/vim-import-js";
-      sha256 = "14dffwn49cyi1qfmsjdjgsm84sb9cmmaybpmpv2hknyr2d56ljyh";
+      sha256 = "0qmsssaj3g51yq78cri7052ahxn0m0y83284dqjlrkvw7yq3ijpl";
     };
     dependencies = [];
   };
 
-  "vim-graphql" = buildVimPlugin {
-    name = "vim-graphql";
-    src = fetchgit {
-      url = "${github}/jparise/vim-graphql";
-      sha256 = "0py0z33qhff671l80ika6zz8gd9zjh0c3x41v3gwjl9089j3if07";
-    };
-    dependencies = [];
-  };
+  # "vim-graphql" = buildVimPlugin {
+  #   name = "vim-graphql";
+  #   src = fetchgit {
+  #     url = "${github}/jparise/vim-graphql";
+  #     sha256 = "0py0z33qhff671l80ika6zz8gd9zjh0c3x41v3gwjl9089j3if07";
+  #   };
+  #   dependencies = [];
+  # };
 
   "php-vim" = buildVimPlugin {
     name = "php-vim";
@@ -111,5 +111,14 @@ in {
       sha256 = "09nvmrijx55pb5lydcdd498y7wjaxyi9b2i36k4rggjd32gdw6mk";
     };
     dependencies = [];
+  };
+
+  "tern_for_vim" = buildVimPlugin {
+    pname = "tern_for_vim";
+    # version = "2019-01-23";
+    src = fetchgit {
+      url = "${github}ternjs/tern_for_vim";
+      sha256 = "0vpi5lqlyf6kcc0ha8hf3ch2h8v3awidgpwbrv9f3bqvyg4yhdcd";
+    };
   };
 }

@@ -43,5 +43,6 @@ in {
     typescript-vim
     tsuquyomi
     vim-prettier
+    vim-import-js
   ];
 }

@@ -96,6 +96,7 @@ bindsym $mod+i $playprev
 
 # Start Applications
 bindsym $mod+F2 exec firefox
+bindsym $mod+F3 exec brave
 
 # change focus
 bindsym $mod+h focus left

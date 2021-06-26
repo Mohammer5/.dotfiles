@@ -19,8 +19,8 @@ let
 in ''
   ${vimAutoCompletion}
   ${vimBufferTabLine}
-  ${vimClipboard}
   ${vimCursorAndLineNumber}
+  ${vimClipboard}
   ${vimFileSaving}
   ${vimFileTypes}
   ${vimFolding}

@@ -3,7 +3,7 @@
 " ========================================================
 " ========================================================
 
-  set clipboard=unnamedplus
+  set clipboard=unnamed
 
   " paste to clipboard
   vnoremap <leader>y "+y

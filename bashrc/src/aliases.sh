@@ -10,11 +10,16 @@ end
 
 alias b-source="source ~/.bashrc"
 
+alias node12="nix-shell ~/.dotfiles/nix/shells/node12.nix --run"
+alias node12yarn="nix-shell ~/.dotfiles/nix/shells/node12.nix --run yarn"
+
 ##
 #
 # Utilities & command improvement
 #
 ##
+
+  # alias yarn="env BROWSER=(which firefox) yarn"
 
   alias mkdir="mkdir -p"
 
@@ -72,6 +77,7 @@ alias b-source="source ~/.bashrc"
 
   alias bf2c="cd /shared/development/bf2c"
   alias  rmp="bf2c && cd ./reactive-money-printer"
+  alias rmps="bf2c && cd ./graphql-server"
 
   #
   # DHIS 2
@@ -84,24 +90,24 @@ alias b-source="source ~/.bashrc"
   alias dhis2="cd /shared/development/dhis2"
 
   # apps
-  alias  d2ai="dhis2 && cd ./import-export-app"
   alias  d2ac="dhis2 && cd ./capture-app"
   alias  d2am="dhis2 && cd ./maintenance-app"
   alias  d2ar="dhis2 && cd ./reports-app"
-  alias  d2au="dhis2 && cd ./user-app"
   alias  d2as="dhis2 && cd ./scheduler-app"
-  alias d2am2="dhis2 && cd ./project-doom"
+  alias  d2au="dhis2 && cd ./user-app"
   alias d2acc="dhis2 && cd ./cache-cleaner-app"
+  alias d2aie="dhis2 && cd ./import-export-app"
+  alias d2am2="dhis2 && cd ./project-doom"
   alias d2asc="dhis2 && cd ./sms-configuration-app"
 
   # production libraries
-  alias    d2pt="dhis2 && cd ./prop-types"
-  alias    d2uc="dhis2 && cd ./ui-core"
-  alias    d2uf="dhis2 && cd ./ui-forms"
-  alias    d2ui="dhis2 && cd ./ui"
-  alias    d2uw="dhis2 && cd ./ui-widgets"
-  alias   d2run="dhis2 && cd ./app-runtime"
-  alias d2shell="dhis2 && cd ./app-platform"
+  alias d2lpt="dhis2 && cd ./prop-types"
+  alias d2luc="dhis2 && cd ./ui-core"
+  alias d2luf="dhis2 && cd ./ui-forms"
+  alias d2lui="dhis2 && cd ./ui"
+  alias d2luw="dhis2 && cd ./ui-widgets"
+  alias d2lar="dhis2 && cd ./app-runtime"
+  alias d2lsh="dhis2 && cd ./app-platform"
 
   # development libs
   alias d2cli="dhis2 && cd ./cli"
@@ -119,6 +125,14 @@ alias rb="reboot"
 
 # Helpers
 alias wrep="grep -Iwrm 1 --color"
+
+function copyfile --argument-names 'FILE'
+  if test -e $FILE
+    cat $FILE | xclip -selection c
+  else
+    echo "File does not exist"
+  end
+end
 
 # Displays
 set MAIN_SCREEN "eDP1"
@@ -158,6 +172,10 @@ end
 #**
 function dhis2debug
   dhis2start $DHIS2_DEBUG_BASE_URL $argv[1] $argv[2]
+end
+
+function dhis2local
+  dhis2start http://localhost:8080 '' $DHIS2_HOME_LOCAL
 end
 
 #**

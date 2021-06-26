@@ -5,7 +5,7 @@
 export FLAMESHOT_DIR=~/Pictures/screenshots
 
 export EDITOR=(which nvim)
-export BROWSER=(which firefox)
+export BROWSER=(which brave)
 
 # Development
 export DEV_DIR=$HOME/development
@@ -18,6 +18,7 @@ set BROWSER_DEFAULT NO
 
 export DHIS2_DEBUG_BASE_URL=https://debug.dhis2.org
 export DHIS2_PLAY_BASE_URL=https://play.dhis2.org
+export DHIS2_LOCAL_BASE_URL=http://localhost:8080
 export DEBUG_DEV_PATH=dev
 export DEBUG_34_PATH=2.34dev
 export DEBUG_33_PATH=2.33dev
@@ -31,9 +32,11 @@ export PLAY_32_PATH=2.32dev
 export PLAY_31_PATH=2.31dev
 export PLAY_30_PATH=2.30
 export PLAY_29_PATH=2.29
+export LOCAL_PATH=
 
 export DHIS2_HOME=$HOME/.dotfiles/dhis2
 export DHIS2_HOME_FPN=$DHIS2_HOME
+export DHIS2_HOME_LOCAL=$HOME/.dotfiles/dhis2/localhost
 export DHIS2_HOME_DEBUG_DEV=$HOME/.dotfiles/dhis2/debug-dev
 export DHIS2_HOME_DEBUG_34=$HOME/.dotfiles/dhis2/debug-2.34
 export DHIS2_HOME_DEBUG_33=$HOME/.dotfiles/dhis2/debug-2.33

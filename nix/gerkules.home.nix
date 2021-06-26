@@ -16,6 +16,11 @@ in {
     homeDirectory = "/home/gerkules";
 
     packages = with pkgs; [
+      calibre
+      brave
+      skype
+      ledger-live-desktop
+      google-chrome
       python2
       unzip
       peek
@@ -124,25 +129,25 @@ in {
       vim-css-color
       vim-jsx-pretty
       coc-snippets
-      tern_for_vim
+      # tern_for_vim
       vim-sexp
       vim-nix
       vim-tmux-navigator
       typescript-vim
       tsuquyomi
+      vim-graphql
 
       # vim-prettier
-      # vim-windowswap
+      vim-import-js
+      vim-javascript
+      vim-windowswap
       # nerdtree-clip
-      # nerdtree-git-plugin
-      # scss-syntax
+      nerdtree-git-plugin
+      scss-syntax
       # vim-jsx
       # vim-jest-snippets
-      # vim-javascript
       # vim-styled-jsx
-      # vim-import-js
-      # vim-graphql
-      # php-vim
+      php-vim
     ];
   };
 }
