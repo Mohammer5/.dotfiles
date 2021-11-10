@@ -22,6 +22,7 @@ alias node12yarn="nix-shell ~/.dotfiles/nix/shells/node12.nix --run yarn"
   # alias yarn="env BROWSER=(which firefox) yarn"
 
   alias mkdir="mkdir -p"
+  alias ssh="kitty +kitten ssh"
 
   #   set PATH $argv[1]
 
@@ -37,7 +38,12 @@ alias node12yarn="nix-shell ~/.dotfiles/nix/shells/node12.nix --run yarn"
   alias freem='free -m'                        # show sizes in MB
 
   # Applications
+  alias torrent="transmission-cli -w /shared/videos -u 0"
   alias g="git"
+  alias master="g co master"
+
+  # Remove node_modules folder
+  alias rmnm="find ./ -iname node_modules -type d | xargs rm -r"
 
 ##
 # 
@@ -69,6 +75,7 @@ alias node12yarn="nix-shell ~/.dotfiles/nix/shells/node12.nix --run yarn"
   # private development
   alias     x="cd /shared/development/private && cd (ls -A1 | fzf)"
   alias   dev="cd /shared/development/private"
+  alias   zet="dev && cd ./zettelkasten"
 
   #
   # BF2C
@@ -132,6 +139,14 @@ function copyfile --argument-names 'FILE'
   else
     echo "File does not exist"
   end
+end
+
+function rmDirsRecursive
+  find ./ -iname $argv[1] -type d | xargs rm -r
+end
+
+function rmFileRecursive
+  find ./ -iname $argv[1] -type f | xargs rm -r
 end
 
 # Displays

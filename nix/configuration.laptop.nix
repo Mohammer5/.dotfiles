@@ -105,7 +105,6 @@
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
 
-
   # Enable the GNOME 3 Desktop Environment.
   # services.xserver.displayManager.gdm.enable = true;
   # services.xserver.desktopManager.gnome3.enable = true;
@@ -161,6 +160,7 @@
     # }))
     neovim
     git
+    git-lfs
     kitty
     fzf
     curl
@@ -179,6 +179,8 @@
     ledger-live-desktop
 
     simple-scan
+    xorg.xbacklight
+    nyxt
   ];
 
   environment.etc.openvpn.source = "${pkgs.update-resolv-conf}/libexec/openvpn";
@@ -214,6 +216,7 @@
   environment.variables = {
     CYPRESS_INSTALL_BINARY = "0";
     CYPRESS_RUN_BINARY = "/home/gerkules/.dotfiles/nix/built-derivations/cypress-4.7.0/bin/Cypress";
+    NIXOS_CONFIG = "/home/gerkules/.dotfiles/nix/configuration.laptop.nix";
   };
 
   users = {

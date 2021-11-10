@@ -49,8 +49,6 @@
   ri = rebase -i
   rin =  "!f() { git ri HEAD~${1}; }; f"
   s = status
-[credential]
-	helper = store
 [core]
 	editor = nvim
 	excludesfile = /home/gerkules/.gitignore_global

@@ -70,6 +70,7 @@
       buildInputs = (oldAttrs.buildInputs ++ [ pkgs.xorg.libX11 pkgs.xorg.libXt ]);
     }))
     git
+    git-lfs
     kitty
     fzf
     curl

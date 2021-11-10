@@ -50,6 +50,7 @@ in {
       # For remotedev-server for node redux scripts
       # gcc-wrapper
       cypress
+      # vscode
 
       transmission
       vlc
@@ -57,7 +58,6 @@ in {
       #texlive
       steam-run
       #brave
-      #wally-cli
 
       # appimage-run
       # avahi
@@ -137,6 +137,7 @@ in {
       tsuquyomi
       vim-graphql
 
+      cypher-vim-syntax
       # vim-prettier
       vim-import-js
       vim-javascript

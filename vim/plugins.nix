@@ -14,6 +14,15 @@ in {
   #   dependencies = [];
   # };
 
+  "cypher-vim-syntax" = buildVimPlugin {
+    name = "cypher-vim-syntax";
+    src = fetchgit {
+      url = "${github}/neo4j-contrib/cypher-vim-syntax";
+      sha256 = "1sjkjlnsp7kmv8rgd46pwc2k5xj90xfn3rn9b5zabr6c2gjfb4l8";
+    };
+    dependencies = [];
+  };
+
   "vim-windowswap" = buildVimPlugin {
     name = "vim-windowswap";
     src = fetchgit {
