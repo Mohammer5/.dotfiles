@@ -2,3 +2,4 @@
 *.swo
 tmux/resurrect-files
 nix/built-derivations
+result
