@@ -20,6 +20,7 @@ alias node12yarn="nix-shell ~/.dotfiles/nix/shells/node12.nix --run yarn"
 ##
 
   # alias yarn="env BROWSER=(which firefox) yarn"
+  alias ys="set DISABLE_PWA 1; env BROWSER=none yarn start"
 
   alias mkdir="mkdir -p"
   alias ssh="kitty +kitten ssh"
@@ -41,6 +42,7 @@ alias node12yarn="nix-shell ~/.dotfiles/nix/shells/node12.nix --run yarn"
   alias torrent="transmission-cli -w /shared/videos -u 0"
   alias g="git"
   alias master="g co master"
+  alias chromium="chromium --disable-features=SameSiteByDefaultCookies,CookiesWithoutSameSiteMustBeSecure,SameSiteDefaultChecksMethodRigorously"
 
   # Remove node_modules folder
   alias rmnm="find ./ -iname node_modules -type d | xargs rm -r"
@@ -90,6 +92,8 @@ alias node12yarn="nix-shell ~/.dotfiles/nix/shells/node12.nix --run yarn"
   # DHIS 2
   # ------
   #
+
+  alias d2docker="sudo ln -s /run/current-system/sw/bin/bash /bin/bash; npx --package @dhis2/cli d2 cluster up master --channel dev --db-version dev --seed --update"
 
   # general
   alias     d="cd /shared/development/dhis2 && cd (ls -A1 | fzf)"

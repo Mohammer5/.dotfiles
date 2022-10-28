@@ -20,3 +20,5 @@ function fish_user_key_bindings
   bind -M insert \cn history-search-forward
   bind -M insert \cl accept-autosuggestion execute
 end
+
+any-nix-shell fish --info-right | source

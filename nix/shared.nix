@@ -1,6 +1,13 @@
 { config, pkgs, ... }:
 
-{
+let
+  pkgsOld = import (builtins.fetchGit {
+    name = "Chromium_93_nix_pkgs";
+    url = "https://github.com/NixOS/nixpkgs/";
+    ref = "refs/heads/nixos-21.11";
+    rev = "137f19d1d48b6d7c7901bb86729a2bce3588d4e9";
+  }) {};
+in {
   imports =
     [ # Include the results of the hardware scan.
       /etc/nixos/hardware-configuration.nix
@@ -22,6 +29,8 @@
 
       efi.canTouchEfiVariables = true;
     };
+
+    kernel.sysctl."net.ipv6.conf.enp2s0.disable_ipv6" = true;
 
     # support exfat filesystem
     # extraModulePackages = [ config.boot.kernelPackages.exfat-nofuse ];
@@ -132,8 +141,14 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-13.6.9"
+  ];
   environment = {
     systemPackages = with pkgs; [
+      veracrypt
+      steam-run
+      obsidian
       neo4j
       tree
       htop
@@ -141,10 +156,7 @@
       cmake
       python3
       wget
-      # neovim needs extra libraries for system clipboard support
-      # (neovim.overrideAttrs (oldAttrs: {
-      #   buildInputs = (oldAttrs.buildInputs ++ [ pkgs.xorg.libX11 pkgs.xorg.libXt ]);
-      # }))
+      xclip
       neovim
       git
       git-lfs
@@ -152,30 +164,29 @@
       fzf
       curl
       firefox
-      chromium
+      brave
+      pkgsOld.chromium
+      # chromium
       yarn
       docker-compose
+      any-nix-shell
 
       # External HDD compatibility
       ntfs3g
-      exfat-utils
+      # exfat-utils
+      exfat
       p7zip
 
-      openvpn
+      # openvpn
       update-resolv-conf
       ledger-live-desktop
 
       simple-scan
       xorg.xbacklight
-      nyxt
+      # nyxt
     ];
 
-    etc.openvpn.source = "${pkgs.update-resolv-conf}/libexec/openvpn";
-
-    variables = {
-      CYPRESS_INSTALL_BINARY = "0";
-      CYPRESS_RUN_BINARY = "/home/gerkules/.dotfiles/nix/built-derivations/cypress-4.7.0/bin/Cypress";
-    };
+    # etc.openvpn.source = "${pkgs.update-resolv-conf}/libexec/openvpn";
   };
 
   location = {
@@ -184,6 +195,9 @@
   };
 
   programs.fish.enable = true;
+  programs.fish.promptInit = ''
+    any-nix-shell fish --info-right | source
+  '';
 
   users = {
     groups = {
@@ -199,7 +213,7 @@
     };
   };
 
-  nix.allowedUsers = ["gerkules"];
+  nix.settings.allowed-users = ["gerkules"];
 
   security.sudo.configFile = ''
     # Keep SSH_AUTH_SOCK so that pam_ssh_agent_auth.so can do its magic.

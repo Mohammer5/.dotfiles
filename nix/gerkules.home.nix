@@ -15,10 +15,19 @@ in {
     username = "gerkules";
     homeDirectory = "/home/gerkules";
 
+    file = {
+      ".bashrc".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/bashrc/bashrc";
+      ".gitconfig".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/git/.gitconfig";
+      ".config/fish/config.fish".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/fish/config.fish";
+      ".config/i3/config".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/i3wm/config";
+      ".config/kitty/kitty.conf".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/kitty/kitty.conf";
+    };
+
     packages = with pkgs; [
+      audacity
       calibre
-      brave
-      skype
+      # brave
+      skypeforlinux
       ledger-live-desktop
       google-chrome
       python2
@@ -26,6 +35,8 @@ in {
       peek
       cryptsetup
       tor-browser-bundle-bin
+      openjdk11
+      youtube-dl
 
       # system stuff
       rofi
@@ -33,8 +44,10 @@ in {
       flameshot
       ranger
       feh
+      ffmpeg
 
       # messengers & online conference
+      teams
       tdesktop
       slack
       zoom-us
@@ -44,9 +57,10 @@ in {
       spotify
 
       # node development
-      nodejs-14_x
+      sublime3
+      nodejs-16_x
       # https://github.com/NixOS/nixpkgs/issues/53820
-      (yarn.override { nodejs = nodejs-14_x; })
+      (yarn.override { nodejs = nodejs-16_x; })
       # For remotedev-server for node redux scripts
       # gcc-wrapper
       cypress
@@ -56,13 +70,11 @@ in {
       vlc
       zip
       #texlive
-      steam-run
-      #brave
+      # steam-run
 
       # appimage-run
       # avahi
       binutils
-      # brave
       # clojure
       # cypress
       # dpkg
@@ -96,59 +108,79 @@ in {
     stateVersion = "20.09";
   };
 
-  programs.neovim = {
-    enable = true;
-    viAlias = true;
-    vimAlias = true;
+  programs = {
+    # fish = {
+    #   enable = true;
+    # };
 
-    extraConfig = vimrc;
+    vscode = {
+      enable = true;
+      package = pkgs.vscodium;
+      extensions = with pkgs.vscode-extensions; [
+        dracula-theme.theme-dracula
+        vscodevim.vim
+        yzhang.markdown-all-in-one
+        betterthantomorrow.calva
+        ms-vsliveshare.vsliveshare
+      ];
+    };
 
-    plugins = with pkgs.vimPlugins // plugins; [
-      vimproc
-      deoplete-nvim
-      YouCompleteMe
-      emmet-vim
-      undotree
-      nerdtree
-      vim-fugitive
-      vim-indent-guides
-      ferret
-      fzf-vim
-      vim-airline-themes
-      vim-devicons
-      awesome-vim-colorschemes
-      indentLine
-      ultisnips
-      ale
-      vim-snippets
-      vim-expand-region
-      vim-surround
-      auto-pairs
-      nerdcommenter
-      editorconfig-vim
-      vim-css-color
-      vim-jsx-pretty
-      coc-snippets
-      # tern_for_vim
-      vim-sexp
-      vim-nix
-      vim-tmux-navigator
-      typescript-vim
-      tsuquyomi
-      vim-graphql
+    neovim = {
+      enable = true;
+      viAlias = true;
+      vimAlias = true;
 
-      cypher-vim-syntax
-      # vim-prettier
-      vim-import-js
-      vim-javascript
-      vim-windowswap
-      # nerdtree-clip
-      nerdtree-git-plugin
-      scss-syntax
-      # vim-jsx
-      # vim-jest-snippets
-      # vim-styled-jsx
-      php-vim
-    ];
+      extraConfig = vimrc;
+
+      plugins = with pkgs.vimPlugins // plugins; [
+        vimproc
+        deoplete-nvim
+        YouCompleteMe
+        emmet-vim
+        undotree
+        nerdtree
+        vim-fugitive
+        vim-indent-guides
+        ferret
+        fzf-vim
+        vim-airline-themes
+        vim-devicons
+        awesome-vim-colorschemes
+        # indentLine
+        ultisnips
+        ale
+        vim-snippets
+        vim-expand-region
+        vim-surround
+        auto-pairs
+        nerdcommenter
+        editorconfig-vim
+        vim-css-color
+        vim-jsx-pretty
+        coc-snippets
+        # tern_for_vim
+        vim-sexp
+        vim-nix
+        vim-tmux-navigator
+        typescript-vim
+        tsuquyomi
+        vim-graphql
+
+        cypher-vim-syntax
+        # vim-prettier
+        vim-import-js
+        vim-javascript
+        vim-windowswap
+        # nerdtree-clip
+        nerdtree-git-plugin
+        scss-syntax
+        # vim-jsx
+        # vim-jest-snippets
+        # vim-styled-jsx
+        php-vim
+        vim-kitty-navigator-custom
+      ];
+    };
   };
+
 }

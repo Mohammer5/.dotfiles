@@ -26,6 +26,9 @@
   csf = "cm 'feat: squash me'"
   csr = "cm 'refactor: squash me'"
   cst = "cm 'test: squash me'"
+  cp = "cherry-pick"
+  cpa = "cp --abort"
+  cpc = "cp --continue"
   d = diff
   dc = diff --name-only --diff-filter=U
   dn = diff --name-only
@@ -46,6 +49,8 @@
   umc = "!f() { git um && git merge master --no-edit; }; f"
   umr = "!f() { git um && git rebase master; }; f"
   rao = remote add origin
+  rba = "rebase --abort"
+  rbc = "rebase --continue"
   ri = rebase -i
   rin =  "!f() { git ri HEAD~${1}; }; f"
   s = status

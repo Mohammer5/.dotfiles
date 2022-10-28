@@ -16,20 +16,21 @@ let
   vimSyntaxHighlighting = builtins.readFile ~/.dotfiles/vim/src/syntax_highlighting.vim;
   vimTextBehavior = builtins.readFile ~/.dotfiles/vim/src/text_behavior.vim;
   vimConfig = builtins.readFile ~/.dotfiles/vim/src/vim_config.vim;
-in ''
-  ${vimAutoCompletion}
-  ${vimBufferTabLine}
-  ${vimCursorAndLineNumber}
-  ${vimClipboard}
-  ${vimFileSaving}
-  ${vimFileTypes}
-  ${vimFolding}
-  ${vimGeneral}
-  ${vimIndentation}
-  ${vimKeyMapping}
-  ${vimLayout}
-  ${vimPluginsConfig}
-  ${vimSyntaxHighlighting}
-  ${vimTextBehavior}
-  ${vimConfig}
-''
+  vimrc = ''
+    ${vimAutoCompletion}
+    ${vimBufferTabLine}
+    ${vimCursorAndLineNumber}
+    ${vimClipboard}
+    ${vimFileSaving}
+    ${vimFileTypes}
+    ${vimFolding}
+    ${vimGeneral}
+    ${vimIndentation}
+    ${vimKeyMapping}
+    ${vimLayout}
+    ${vimPluginsConfig}
+    ${vimSyntaxHighlighting}
+    ${vimTextBehavior}
+    ${vimConfig}
+  '';
+in vimrc

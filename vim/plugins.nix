@@ -14,6 +14,22 @@ in {
   #   dependencies = [];
   # };
 
+  "vim-kitty-navigator-custom" = buildVimPlugin {
+    name = "vim-kitty-navigator";
+    src = fetchgit {
+      url = "${github}/knubie/vim-kitty-navigator";
+      sha256 = "03rf49w3x67aayfn6hl0jhf4gik1scq4khhnvicp1zabdn8cq175";
+    };
+    dependencies = [];
+    postInstall = ''
+      echo ""
+      echo " !!!!! "
+      echo ">>> REMEMBER TO RUN: cp $out/*.py ~/.config/kitty/"
+      echo " !!!!! "
+      echo ""
+    '';
+  };
+
   "cypher-vim-syntax" = buildVimPlugin {
     name = "cypher-vim-syntax";
     src = fetchgit {

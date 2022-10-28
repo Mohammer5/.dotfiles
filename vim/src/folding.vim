@@ -19,7 +19,7 @@
 
   augroup FoldJS
     autocmd!
-    autocmd Syntax javascript,jsx,javascript.jsx,typescript setlocal foldmethod=syntax
-    autocmd Syntax javascript,jsx,javascript.jsx,typescript setlocal foldcolumn=1 "defines 1 col at window left, to indicate folding
+    autocmd Syntax javascript,jsx,javascript.jsx,javascriptreact,typescript setlocal foldmethod=syntax
+    autocmd Syntax javascript,jsx,javascript.jsx,javascriptreact,typescript setlocal foldcolumn=1 "defines 1 col at window left, to indicate folding
   augroup END
 " }}}

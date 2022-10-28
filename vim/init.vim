@@ -59,6 +59,7 @@
     autocmd Syntax vim setlocal foldmethod=marker
     autocmd Syntax markdown setlocal foldmethod=marker
     autocmd Syntax scss.css setlocal foldmethod=indent
+    autocmd Syntax javascript.jsx setlocal foldmethod=indent
     "autocmd Syntax scss.css,javascript,javascript.jsx,typescript setlocal foldmethod=indent
   augroup END
 
@@ -70,8 +71,8 @@
 
   augroup FoldJS
     autocmd!
-    autocmd Syntax javascript,jsx,javascript.jsx,typescript setlocal foldmethod=syntax
-    autocmd Syntax javascript,jsx,javascript.jsx,typescript setlocal foldcolumn=1 "defines 1 col at window left, to indicate folding
+    autocmd Syntax javascript,jsx,javascript.jsx,javascriptreact,typescript setlocal foldmethod=syntax
+    autocmd Syntax javascript,jsx,javascript.jsx,javascriptreact,typescript setlocal foldcolumn=1 "defines 1 col at window left, to indicate folding
   augroup END
 " }}}
 
@@ -631,7 +632,7 @@
   hi MatchParen cterm=none ctermbg=white ctermfg=black
 
   syntax enable
-  set termguicolors
+  # set termguicolors
   set background=dark
 
   "set background=light
