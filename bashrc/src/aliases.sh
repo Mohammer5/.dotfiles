@@ -75,15 +75,29 @@ alias node12yarn="nix-shell ~/.dotfiles/nix/shells/node12.nix --run yarn"
   alias dot=". && nvim (find . -type f -not -path '*.git/*' | fzf)"
 
   # private development
-  alias     x="cd /shared/development/private && cd (ls -A1 | fzf)"
-  alias   dev="cd /shared/development/private"
-  alias   zet="dev && cd ./zettelkasten"
+  alias   dev="cd /shared/development"
+  alias  devp="dev && cd ./private"
+  alias     x="devp && cd (ls -A1 | fzf)"
+
+  #
+  # Logseq
+  # ------
+  #
+  alias    lq="dev && cd ./logseq"
+  alias   lqc="lq && cd ./code/logseq"
+  alias   lqg="lq && cd ./graphs"
+  alias  lqgx="lq && cd (ls -A1 | fzf)"
+
+  #
+  # Knowledge Graph
+  # ---------------
+  #
+  alias kg="dev && cd ./knowledge-graph"
 
   #
   # BF2C
   # ------
   #
-
   alias bf2c="cd /shared/development/bf2c"
   alias  rmp="bf2c && cd ./reactive-money-printer"
   alias rmps="bf2c && cd ./graphql-server"
@@ -92,7 +106,6 @@ alias node12yarn="nix-shell ~/.dotfiles/nix/shells/node12.nix --run yarn"
   # DHIS 2
   # ------
   #
-
   alias d2docker="sudo ln -s /run/current-system/sw/bin/bash /bin/bash; npx --package @dhis2/cli d2 cluster up master --channel dev --db-version dev --seed --update"
 
   # general

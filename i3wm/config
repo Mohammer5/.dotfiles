@@ -171,11 +171,11 @@ bindsym $mod+Ctrl+Left workspace prev
 #                 set $ws2 2:
 set $ws1 "1Development" 
 set $ws2 "2Main" 
-set $ws3 "3" 
+set $ws3 "3Other" 
 set $ws4 "4" 
 set $ws5 "5" 
 set $ws6 "6" 
-set $ws7 "7" 
+set $ws7 "7KG" 
 set $ws8 "8Slack" 
 set $ws9 "9Chats"
 set $ws0 "Spotify"

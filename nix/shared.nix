@@ -132,6 +132,12 @@ in {
       # Rule for the Moonlander
       SUBSYSTEM=="usb", ATTR{idVendor}=="3297", ATTR{idProduct}=="1969", GROUP="plugdev"
     '';
+
+    # openvpn.servers = {
+    #   germany = {
+    #     config = '' config /home/gerkules/.dotfiles/nix/opvn-files/my_expressvpn_germany_-_frankfurt_-_1_udp.ovpn '';
+    #   };
+    # };
   };
 
   virtualisation.docker.enable = true;

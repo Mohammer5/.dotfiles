@@ -179,6 +179,7 @@ in {
         # vim-styled-jsx
         php-vim
         vim-kitty-navigator-custom
+        conjure
       ];
     };
   };

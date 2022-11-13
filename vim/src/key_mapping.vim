@@ -8,6 +8,7 @@
 
   " leader key
   let mapleader = ","
+  let maplocalleader = "\\"
   inoremap jk <Esc>
   inoremap <Esc> <Nop>
 
@@ -149,6 +150,14 @@
   nnoremap <space>given 0c$Given('', () => {})<esc>
   nnoremap <space>when 0c$When('', () => {})<esc>
   nnoremap <space>then 0c$Then('', () => {})<esc>
+      
+  :" }}}
+
+  "* Key mapping -> Clojure(script) helpers {{{
+  "* ========================================================
+
+  " Cypress cucumber
+  nnoremap <leader>clj :ConjureShadowSelect app<CR>
       
   :" }}}
 

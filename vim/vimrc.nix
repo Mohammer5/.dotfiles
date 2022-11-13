@@ -1,6 +1,7 @@
 { stdenv, writeText }:
 
 let
+  vimAleLinters = builtins.readFile ~/.dotfiles/vim/src/ale_config.vim;
   vimAutoCompletion = builtins.readFile ~/.dotfiles/vim/src/auto-completion.vim;
   vimBufferTabLine = builtins.readFile ~/.dotfiles/vim/src/buffer_tab_line.vim;
   vimClipboard = builtins.readFile ~/.dotfiles/vim/src/clipboard.vim;
@@ -17,6 +18,7 @@ let
   vimTextBehavior = builtins.readFile ~/.dotfiles/vim/src/text_behavior.vim;
   vimConfig = builtins.readFile ~/.dotfiles/vim/src/vim_config.vim;
   vimrc = ''
+    ${vimAleLinters}
     ${vimAutoCompletion}
     ${vimBufferTabLine}
     ${vimCursorAndLineNumber}

@@ -47,3 +47,5 @@ tags
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+nix-shell.nix
