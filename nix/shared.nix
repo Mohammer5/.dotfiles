@@ -63,7 +63,7 @@ in {
   services = {
     redshift.enable = true;
     geoclue2.enable = true;
-    localtime.enable = true;
+    localtimed.enable = true;
     blueman.enable = true;
 
     xserver = {

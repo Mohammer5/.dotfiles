@@ -20,7 +20,7 @@ in {
   };
 
   services.openssh.enable = true;
-  services.openssh.permitRootLogin = "yes";
+  services.openssh.settings.PermitRootLogin = "yes";
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
