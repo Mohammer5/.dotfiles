@@ -1,9 +1,16 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   # neovim = pkgs.callPackage ../vim/neovim.nix {};
   vimrc = pkgs.callPackage ../vim/vimrc.nix {};
   plugins = pkgs.callPackage ../vim/plugins.nix {};
+  pkgsCypressOld = import (builtins.fetchGit {
+     # Descriptive name to make the store path easier to identify                
+     name = "Cypress-9.6.0-pkgs";                                                 
+     url = "https://github.com/NixOS/nixpkgs/";                       
+     ref = "refs/heads/nixpkgs-unstable";                     
+     rev = "bf972dc380f36a3bf83db052380e55f0eaa7dcb6";                                           
+  }) {};
 in {
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -16,9 +23,16 @@ in {
     homeDirectory = "/home/gerkules";
 
     packages = with pkgs; [
+      nmap
+      wirelesstools
+      rpi-imager
+      pcmanfm
+      teams
+      veracrypt
+      logseq
       calibre
       brave
-      skype
+      skypeforlinux
       ledger-live-desktop
       google-chrome
       python2
@@ -26,6 +40,7 @@ in {
       peek
       cryptsetup
       tor-browser-bundle-bin
+      audacity
 
       # system stuff
       rofi
@@ -33,9 +48,10 @@ in {
       flameshot
       ranger
       feh
+      libnotify
 
       # messengers & online conference
-      tdesktop
+      ## tdesktop
       slack
       zoom-us
 
@@ -44,12 +60,12 @@ in {
       spotify
 
       # node development
-      nodejs-14_x
+      nodejs-16_x
       # https://github.com/NixOS/nixpkgs/issues/53820
-      (yarn.override { nodejs = nodejs-14_x; })
+      (yarn.override { nodejs = nodejs-16_x; })
       # For remotedev-server for node redux scripts
       # gcc-wrapper
-      cypress
+      pkgsCypressOld.cypress
       # vscode
 
       transmission
@@ -131,11 +147,14 @@ in {
       coc-snippets
       # tern_for_vim
       vim-sexp
+      # vim-fireplace
+      conjure
       vim-nix
       vim-tmux-navigator
       typescript-vim
       tsuquyomi
       vim-graphql
+      vim-visual-multi
 
       cypher-vim-syntax
       # vim-prettier

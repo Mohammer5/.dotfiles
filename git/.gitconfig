@@ -22,6 +22,9 @@
   co = checkout
   cob = checkout -b
   cof = "!f() { git checkout $(git branch | fzf); }; f"
+  cp = 'cherry-pick'
+  cpc = 'cherry-pick --continue'
+  cpa = 'cherry-pick --abort'
   csc = "cm 'chore: squash me'"
   csf = "cm 'feat: squash me'"
   csr = "cm 'refactor: squash me'"
@@ -39,6 +42,10 @@
   logs = log --color --graph --pretty=format:'%Cred%h%Creset %C(bold blue)<%an> %Cgreen(%cr)%Creset%C(yellow)%d%Creset %s ' --abbrev-commit
   lan = la -n
   mb = merge-base
+  mo = "!f() { \
+    branchName=$( git branch --show-current ); \
+    git merge origin/$branchName; \
+  }; f"
   poh = push origin HEAD
   pohf = push origin HEAD --force-with-lease
   unc = reset HEAD~
@@ -46,6 +53,7 @@
   umc = "!f() { git um && git merge master --no-edit; }; f"
   umr = "!f() { git um && git rebase master; }; f"
   rao = remote add origin
+  rbc = rebase --continue
   ri = rebase -i
   rin =  "!f() { git ri HEAD~${1}; }; f"
   s = status

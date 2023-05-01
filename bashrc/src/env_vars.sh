@@ -12,6 +12,10 @@ export DEV_DIR=$HOME/development
 export DEV_DIR_DHIS2=$DEV_DIR/dhis2
 export FZF_DEFAULT_COMMAND='ag -g ""'
 
+# Cypres
+export CYPRESS_INSTALL_BINARY="0"
+export CYPRESS_RUN_BINARY=(which Cypress)
+
 # dhis2
 # BROWSER_DEFAULT=NO
 set BROWSER_DEFAULT NO

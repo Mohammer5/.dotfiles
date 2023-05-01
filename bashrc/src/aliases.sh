@@ -41,9 +41,20 @@ alias node12yarn="nix-shell ~/.dotfiles/nix/shells/node12.nix --run yarn"
   alias torrent="transmission-cli -w /shared/videos -u 0"
   alias g="git"
   alias master="g co master"
+  alias chromium="chromium --disable-features=SameSiteByDefaultCookies,CookiesWithoutSameSiteMustBeSecure,SameSiteDefaultChecksMethodRigorously"
 
   # Remove node_modules folder
   alias rmnm="find ./ -iname node_modules -type d | xargs rm -r"
+
+##
+#
+#
+#
+##
+
+  # l = laptop
+  alias l_ext_mon_only="xrandr --output DP-2 --mode 1920x1080 --primary --output eDP-1 --off"
+  alias l_int_mon_only="xrandr --output DP-2 --off --output eDP-1 --auto --primary"
 
 ##
 # 
@@ -73,16 +84,15 @@ alias node12yarn="nix-shell ~/.dotfiles/nix/shells/node12.nix --run yarn"
   alias dot=". && nvim (find . -type f -not -path '*.git/*' | fzf)"
 
   # private development
-  alias     x="cd /shared/development/private && cd (ls -A1 | fzf)"
-  alias   dev="cd /shared/development/private"
-  alias   zet="dev && cd ./zettelkasten"
+  alias   dev="cd /shared/development"
+  alias     x="dev && cd ./private && cd (ls -A1 | fzf)"
 
   #
   # BF2C
   # ------
   #
 
-  alias bf2c="cd /shared/development/bf2c"
+  alias bf2c="dev && cd ./bf2c"
   alias  rmp="bf2c && cd ./reactive-money-printer"
   alias rmps="bf2c && cd ./graphql-server"
 
@@ -164,6 +174,8 @@ function monleft
 end
 
 # DHIS2 start
+
+alias jgs:start="env BROWSER=none yarn start --proxy https://debug.dhis2.org/dev"
 
 #**
 #* @prarm {string} $1 - dhis2 base url
