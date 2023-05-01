@@ -48,6 +48,16 @@ alias node12yarn="nix-shell ~/.dotfiles/nix/shells/node12.nix --run yarn"
   alias rmnm="find ./ -iname node_modules -type d | xargs rm -r"
 
 ##
+#
+#
+#
+##
+
+  # l = laptop
+  alias l_ext_mon_only="xrandr --output DP-2 --mode 1920x1080 --primary --output eDP-1 --off"
+  alias l_int_mon_only="xrandr --output DP-2 --off --output eDP-1 --auto --primary"
+
+##
 # 
 # Printing
 #
@@ -98,7 +108,7 @@ alias node12yarn="nix-shell ~/.dotfiles/nix/shells/node12.nix --run yarn"
   # BF2C
   # ------
   #
-  alias bf2c="cd /shared/development/bf2c"
+  alias bf2c="dev && cd ./bf2c"
   alias  rmp="bf2c && cd ./reactive-money-printer"
   alias rmps="bf2c && cd ./graphql-server"
 
@@ -181,6 +191,8 @@ function monleft
 end
 
 # DHIS2 start
+
+alias jgs:start="env BROWSER=none yarn start --proxy https://debug.dhis2.org/dev"
 
 #**
 #* @prarm {string} $1 - dhis2 base url

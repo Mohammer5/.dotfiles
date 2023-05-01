@@ -13,7 +13,7 @@
   let g:NERDTreeNodeDelimiter = "\u00a0"
 
   " Open NERDTree
-  nnoremap <C-n> :NERDTreeToggle<CR>
+  nnoremap ;; :NERDTreeToggle<CR>
   nnoremap <Space>ntf :NERDTreeFind<CR>
 
   "open a nerdtree when vim starts

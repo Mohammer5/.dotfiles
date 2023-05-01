@@ -1,9 +1,16 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   # neovim = pkgs.callPackage ../vim/neovim.nix {};
   vimrc = pkgs.callPackage ../vim/vimrc.nix {};
   plugins = pkgs.callPackage ../vim/plugins.nix {};
+  pkgsCypressOld = import (builtins.fetchGit {
+     # Descriptive name to make the store path easier to identify                
+     name = "Cypress-9.6.0-pkgs";                                                 
+     url = "https://github.com/NixOS/nixpkgs/";                       
+     ref = "refs/heads/nixpkgs-unstable";                     
+     rev = "bf972dc380f36a3bf83db052380e55f0eaa7dcb6";                                           
+  }) {};
 in {
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -25,8 +32,15 @@ in {
 
     packages = with pkgs; [
       audacity
+      nmap
+      wirelesstools
+      rpi-imager
+      pcmanfm
+      teams
+      veracrypt
+      logseq
       calibre
-      # brave
+      brave
       skypeforlinux
       ledger-live-desktop
       google-chrome
@@ -45,10 +59,10 @@ in {
       ranger
       feh
       ffmpeg
+      libnotify
 
       # messengers & online conference
-      teams
-      tdesktop
+      ## tdesktop
       slack
       zoom-us
 
@@ -63,7 +77,7 @@ in {
       (yarn.override { nodejs = nodejs-16_x; })
       # For remotedev-server for node redux scripts
       # gcc-wrapper
-      cypress
+      pkgsCypressOld.cypress
       # vscode
 
       transmission
