@@ -22,7 +22,6 @@ in {
       grub = {
         efiSupport = true;
         enable = true;
-        version = 2;
         devices = [ "nodev" ];
         useOSProber = true;
       };
@@ -35,6 +34,8 @@ in {
     # support exfat filesystem
     # extraModulePackages = [ config.boot.kernelPackages.exfat-nofuse ];
   };
+
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   networking = {
     # The global useDHCP flag is deprecated, therefore explicitly set to false here.
@@ -61,6 +62,7 @@ in {
   };
 
   services = {
+    flatpak.enable = true;
     redshift.enable = true;
     geoclue2.enable = true;
     localtimed.enable = true;

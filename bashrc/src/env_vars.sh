@@ -55,5 +55,6 @@ export DHIS2_HOME_PLAY_31=$HOME/.dotfiles/dhis2/play-2.31
 export DHIS2_HOME_PLAY_30=$HOME/.dotfiles/dhis2/play-2.30
 export DHIS2_HOME_PLAY_29=$HOME/.dotfiles/dhis2/play-2.29
 
+export DOT_FILES=$HOME/.dotfiles
 source $DOT_FILES/bashrc/src/env_vars/dhis.server-env.sh
 source $DOT_FILES/bashrc/src/env_vars/dhis.d2-ui.env.sh

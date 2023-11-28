@@ -2,7 +2,7 @@
 
 if test -x /usr/bin/dircolors
   if test -r ~/.dircolors
-    eval (dircolors -b ~/.dircolors) || eval (dircolors -b)
+    dircolors -b ~/.dircolors; or dircolors -b
   end
 
   alias ls="ls --color=auto"
@@ -20,7 +20,8 @@ alias node12yarn="nix-shell ~/.dotfiles/nix/shells/node12.nix --run yarn"
 ##
 
   # alias yarn="env BROWSER=(which firefox) yarn"
-  alias ys="set DISABLE_PWA 1; env BROWSER=none yarn start"
+  alias ys="env BROWSER=none yarn start"
+  alias ns="env BROWSER=none npm start"
 
   alias mkdir="mkdir -p"
   alias ssh="kitty +kitten ssh"
@@ -160,13 +161,13 @@ alias rb="reboot"
 # Helpers
 alias wrep="grep -Iwrm 1 --color"
 
-function copyfile --argument-names 'FILE'
-  if test -e $FILE
-    cat $FILE | xclip -selection c
-  else
-    echo "File does not exist"
-  end
-end
+# function copyfile --argument-names 'FILE'
+#   if test -e $FILE
+#     cat $FILE | xclip -selection c
+#   else
+#     echo "File does not exist"
+#   end
+# end
 
 function rmDirsRecursive
   find ./ -iname $argv[1] -type d | xargs rm -r

@@ -30,7 +30,8 @@ font pango:DejaVu Sans Mono 10
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec kitty -o allow_remote_control=yes --listen-on unix:/tmp/mykitty
+bindsym $mod+Return exec kitty -o allow_remote_control=yes
+# bindsym $mod+Return exec kitty -o allow_remote_control=yes --listen-on unix:/tmp/mykitty
 
 # kill focused window
 bindsym $mod+Shift+q kill

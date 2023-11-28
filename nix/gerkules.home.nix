@@ -11,6 +11,20 @@ let
      ref = "refs/heads/nixpkgs-unstable";                     
      rev = "bf972dc380f36a3bf83db052380e55f0eaa7dcb6";                                           
   }) {};
+
+  kaktree = pkgs.kakouneUtils.buildKakounePluginFrom2Nix {
+    pname = "kaktree";
+    version = "2023-05-03";
+    src = pkgs.fetchFromGitHub {
+      owner = "andreyorst";
+      repo = "kaktree";
+      rev = "acd47e0c8549afe1634a79a5bbd6d883daa8ba0a";
+      sha256 = "9wiJFVxm+xZndUUpqrQ9eld/Df3wcp7gFDZTdInGPQQ=";
+    };
+    meta.homepage = "https://github.com/andreyorst/kaktree/";
+  };
+
+  kakouneConfig = builtins.readFile "${config.home.homeDirectory}/.dotfiles/kakoune/kakrc";
 in {
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -28,9 +42,12 @@ in {
       ".config/fish/config.fish".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/fish/config.fish";
       ".config/i3/config".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/i3wm/config";
       ".config/kitty/kitty.conf".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/kitty/kitty.conf";
+      # ".config/kak/autoload/config.kak".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/kakoune/config.kak";
     };
 
     packages = with pkgs; [
+      lf
+      ripgrep
       audacity
       nmap
       wirelesstools
@@ -44,7 +61,7 @@ in {
       skypeforlinux
       ledger-live-desktop
       google-chrome
-      python2
+      # python2
       unzip
       peek
       cryptsetup
@@ -59,12 +76,13 @@ in {
       ranger
       feh
       ffmpeg
-      libnotify
+      # libnotify
 
       # messengers & online conference
-      ## tdesktop
+      tdesktop
       slack
       zoom-us
+      anbox
 
       # music
       # (spotify.override { version = "1.1.46.916.g416cacf1"; })
@@ -72,9 +90,11 @@ in {
 
       # node development
       sublime3
-      nodejs-16_x
+      nodejs
+      yarn
+      # nodejs-16_x
       # https://github.com/NixOS/nixpkgs/issues/53820
-      (yarn.override { nodejs = nodejs-16_x; })
+      # (yarn.override { nodejs = nodejs-16_x; })
       # For remotedev-server for node redux scripts
       # gcc-wrapper
       pkgsCypressOld.cypress
@@ -101,7 +121,6 @@ in {
       # heroku
       # home-manager-path
       # leiningen
-      # libnotify
       # nmap
       # nss
       # octave
@@ -122,11 +141,25 @@ in {
     stateVersion = "20.09";
   };
 
+  ####################################
+  #
+  # Kakoune
+  #
+  ####################################
   programs = {
-    # fish = {
-    #   enable = true;
-    # };
+    kakoune = {
+      enable = true;
+      extraConfig = kakouneConfig;
+      plugins = [kaktree];
+    };
+  };
 
+  ####################################
+  #
+  # Other programs
+  #
+  ####################################
+  programs = {
     vscode = {
       enable = true;
       package = pkgs.vscodium;
