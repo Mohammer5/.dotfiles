@@ -1,8 +1,8 @@
-source ~/.bashrc
+# source ~/.bashrc
 
-set -gx PATH /snap/bin $PATH
-set -gx PATH (yarn global bin) $PATH
-set -gx PATH /usr/local/ant/bin $PATH
+# set -gx PATH /snap/bin $PATH
+# set -gx PATH (yarn global bin) $PATH
+# set -gx PATH /usr/local/ant/bin $PATH
 
 fish_vi_key_bindings
 set -g theme_color_scheme zenburn
@@ -21,4 +21,4 @@ function fish_user_key_bindings
   bind -M insert \cl accept-autosuggestion execute
 end
 
-any-nix-shell fish --info-right | source
+# any-nix-shell fish --info-right | source
