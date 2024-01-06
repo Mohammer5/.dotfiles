@@ -19,23 +19,23 @@
       laptopYoga = nixpkgs.lib.nixosSystem {
         inherit system;
 
-	      modules = [
-	        ./configuration.nix
-	        ./hardware-configuration.nix
-	        ./modules/xserver.nix
+        modules = [
+          ./configuration.nix
+          ./hardware-configuration.nix
+          ./modules/xserver.nix
           ./modules/environment-laptopYoga.nix
           ./modules/audio.nix
           ./modules/networking.nix
           ./modules/systemPackages.nix
           ./modules/yoga-laptop-hardware.nix
           ./modules/systemState.nix
-	        home-manager.nixosModules.home-manager
-	        {
-	          home-manager.useGlobalPkgs = true;
-	          home-manager.useUserPackages = true;
-	          home-manager.users.gerkules = import ./home.nix;
-	        }
-	      ];
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.gerkules = import ./home.nix;
+          }
+        ];
       };
     };
 
