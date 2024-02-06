@@ -11,6 +11,10 @@ in {
   programs = {
     home-manager.enable = true;
     bash.shellAliases = import ./modules/shell-aliases.nix;
+    git = {
+      enable = true;
+      ignores = import ./git/gitignore_global.nix;
+    };
   };
 
   home = {
@@ -39,13 +43,11 @@ in {
     };
 
     packages = with pkgs; [
-      # neovim
       brave
       kanshi
       chromium
       firefox
       tdesktop
-      git
       kitty
       unzip
       slack
@@ -62,6 +64,7 @@ in {
       spotify
       vlc
       zip
+      transmission
     ];
 
     stateVersion = "23.11";

@@ -49,3 +49,7 @@ ehthumbs.db
 Thumbs.db
 
 nix-shell.nix
+.direnv
+.envrc
+flake.nix
+flake.lock

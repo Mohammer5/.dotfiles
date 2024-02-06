@@ -28,6 +28,7 @@
           ./modules/networking.nix
           ./modules/systemPackages.nix
           ./modules/yoga-laptop-hardware.nix
+          ./modules/direnv.nix
           ./modules/systemState.nix
           home-manager.nixosModules.home-manager
           {

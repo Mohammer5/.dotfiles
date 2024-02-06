@@ -23,7 +23,7 @@
   freem = "free -m";                        # show sizes in MB;
   
   # Applications
-  torrent = "transmission-cli -w /shared/videos -u 0";
+  torrent = "transmission-cli -w ~/Downloads -u 0";
   g = "git";
   master = "g co master";
   chromium = "chromium --disable-features=SameSiteByDefaultCookies,CookiesWithoutSameSiteMustBeSecure,SameSiteDefaultChecksMethodRigorously";

@@ -11,11 +11,12 @@
     };
   };
 
-  time.timeZone = "Europe/Berlin";
+  # time.timeZone = "Europe/Berlin";
+  time.timeZone = "Asia/Manila";
+  services.localtimed.enable = true;
   i18n.defaultLocale = "en_US.UTF-8";
-  fonts.packages = with pkgs; [
-    dejavu_fonts
-  ];
+
+  fonts.packages = [pkgs.dejavu_fonts];
 
   programs.bash.shellAliases = import ./modules/shell-aliases.nix;
   programs.fish.enable = true;
@@ -36,4 +37,11 @@
   hardware.bluetooth.enable = true;
   hardware.enableAllFirmware  = true;
   nixpkgs.config.permittedInsecurePackages = ["electron-13.6.9"];
+
+  services.printing.enable = true;
+  services.avahi = {
+    enable = true;
+    nssmdns = true;
+    openFirewall = true;
+  };
 }

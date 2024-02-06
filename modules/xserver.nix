@@ -31,8 +31,11 @@
         lightdm.enable = true;
         defaultSession = "none+i3";
 
+        # sessionCommands = ''
+        #   ${pkgs.xorg.xrandr}/bin/xrandr --output eDP-1-1 --mode 1680x1050 --primary
+        # '';
         sessionCommands = ''
-          ${pkgs.xorg.xrandr}/bin/xrandr --output eDP-1-1 --mode 1680x1050 --primary
+          ${pkgs.xorg.xrandr}/bin/xrandr --output eDP-1-1 --mode 1440x900 --primary
         '';
       };
 
