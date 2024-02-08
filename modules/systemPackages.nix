@@ -12,6 +12,7 @@
       # External HDD compatibility
       ntfs3g
       exfat
+      docker-compose
     ];
   };
 }

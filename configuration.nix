@@ -21,6 +21,7 @@
   programs.bash.shellAliases = import ./modules/shell-aliases.nix;
   programs.fish.enable = true;
   programs.fish.shellAliases = import ./modules/shell-aliases.nix;
+  programs.gnupg.agent.enable = true;
 
   users.users.gerkules = {
     isNormalUser = true;

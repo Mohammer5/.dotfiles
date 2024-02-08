@@ -14,6 +14,23 @@ in {
     git = {
       enable = true;
       ignores = import ./git/gitignore_global.nix;
+      aliases = import ./git/aliases.nix;
+
+      # default user information
+      userName = "Mohammer5";
+      userEmail = "jgs.salomon@gmail.com";
+
+      # conditional user information overrides
+      includes = [
+        { path = builtins.toString ./git/gpg-key.gitconfig; }
+        {
+          condition = "gitdir:/development/dhis2/";
+          contents.user = {
+            name = "Mohammer5";
+            email = "jan-gerke@dhis2.org";
+          };
+        }
+      ];
     };
   };
 
@@ -32,7 +49,7 @@ in {
     file = {
       ".config/i3/config".source = config.lib.file.mkOutOfStoreSymlink "${configDirectory}/i3wm/config";
       ".config/kitty/kitty.conf".source = config.lib.file.mkOutOfStoreSymlink "${configDirectory}/kitty/kitty.conf";
-      ".gitconfig".source = config.lib.file.mkOutOfStoreSymlink "${configDirectory}/git/.gitconfig";
+      # ".gitconfig".source = config.lib.file.mkOutOfStoreSymlink "${configDirectory}/git/.gitconfig";
       ".config/fish/config.fish".source = config.lib.file.mkOutOfStoreSymlink "${configDirectory}/fish/config.fish";
       ".config/kitty/pass_keys.py".text = builtins.readFile(builtins.fetchurl {
         url = "https://raw.githubusercontent.com/knubie/vim-kitty-navigator/20abf8613aa228a5def1ae02cd9da0f2d210352a/pass_keys.py";
