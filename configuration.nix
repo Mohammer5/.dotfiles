@@ -39,6 +39,7 @@
   hardware.enableAllFirmware  = true;
   nixpkgs.config.permittedInsecurePackages = ["electron-13.6.9"];
 
+  services.teamviewer.enable = true;
   services.printing.enable = true;
   services.avahi = {
     enable = true;
