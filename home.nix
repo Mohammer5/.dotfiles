@@ -60,6 +60,8 @@ in {
     };
 
     packages = with pkgs; [
+      sublime4
+      anki-bin
       brave
       kanshi
       chromium
@@ -130,6 +132,7 @@ in {
       vim-graphql
       vim-kitty-navigator
       conjure
+      vim-ocaml
   
       # cypher-vim-syntax
       # # vim-prettier

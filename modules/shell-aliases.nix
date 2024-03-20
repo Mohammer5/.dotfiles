@@ -38,7 +38,9 @@
   # dev shells
   js = "nix develop /nixos-config#js -c $SHELL";
   jsn16 = "nix develop /nixos-config#jsn16 -c $SHELL";
+  cyp = "nix develop /nixos-config#cypress -c $SHELL";
   clj = "nix develop /nixos-config#clojure -c $SHELL";
+  ocaml = "nix develop /nixos-config#ocaml -c $SHELL";
   
   ##
   #

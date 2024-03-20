@@ -18,6 +18,8 @@
 
   fonts.packages = [pkgs.dejavu_fonts];
 
+  programs.neovim.enable = true;
+  programs.neovim.defaultEditor = true;
   programs.bash.shellAliases = import ./modules/shell-aliases.nix;
   programs.fish.enable = true;
   programs.fish.shellAliases = import ./modules/shell-aliases.nix;
@@ -37,7 +39,7 @@
   nixpkgs.config.allowUnfree = true;
   hardware.bluetooth.enable = true;
   hardware.enableAllFirmware  = true;
-  nixpkgs.config.permittedInsecurePackages = ["electron-13.6.9"];
+  nixpkgs.config.permittedInsecurePackages = ["electron-13.6.9" "openssl-1.1.1w"];
 
   services.teamviewer.enable = true;
   services.printing.enable = true;

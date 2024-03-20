@@ -22,3 +22,5 @@ function fish_user_key_bindings
 end
 
 # any-nix-shell fish --info-right | source
+
+source /home/gerkules/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true

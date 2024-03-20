@@ -22,6 +22,13 @@
         permittedInsecurePackages = ["nodejs-16.20.0"];
       };
     });
+    customCypress = pkgs.cypress.overrideAttrs (oldAttrs: {
+      # Use `fetchFromGitHub` or another appropriate fetcher
+      src = pkgs.fetchurl {
+        url = "<URL-to-specific-version-archive>";
+        sha256 = "<correct-sha256>";
+      };
+    });
   in {
     nixosConfigurations = {
       laptopYoga = nixpkgs.lib.nixosSystem {
@@ -42,6 +49,7 @@
           ./modules/yoga-laptop-hardware.nix
           ./modules/direnv.nix
           ./modules/systemState.nix
+          ./modules/udev.nix
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
@@ -69,10 +77,10 @@
 
       cypress = pkgs.mkShell {
         name = "Cypress (latest) development";
-        buildInputs = [pkgs.cypress] // jsPackages;
+        buildInputs = [pkgs.cypress] ++ jsPackages;
         shellHook = ''
           export NODE_OPTIONS="--openssl-legacy-provider"
-          export CYPRESS_RUN_BINARY="${pkgs.cypress}/bin"
+          export CYPRESS_RUN_BINARY="${pkgs.cypress}/bin/Cypress"
         '';
       };
 
@@ -81,6 +89,22 @@
         buildInputs = with pkgs; [
           clojure
           leiningen
+        ];
+      };
+
+      ocaml = pkgs.mkShell {
+        name = "Standard OCAML development";
+        buildInputs = with pkgs; [
+          ocaml
+          ocamlPackages.findlib
+          dune_2
+          ocamlPackages.ocaml-lsp
+          ocamlformat
+          ocamlPackages.ocamlformat-rpc-lib
+          ocamlPackages.utop
+          ocamlPackages.re
+          mpv
+          opam
         ];
       };
     };
